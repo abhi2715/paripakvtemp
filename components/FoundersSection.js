@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import TiltCard from './TiltCard';
+import ParallaxBackground from './ParallaxBackground';
 import styles from './FoundersSection.module.css';
 
 const founders = [
@@ -24,8 +25,9 @@ export default function FoundersSection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className={`${styles.founders} section`} id="founders" ref={ref}>
-      <div className="max-width">
+    <section className={`${styles.founders} section`} id="founders" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+      <ParallaxBackground targetRef={ref} />
+      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, y: 30 }}

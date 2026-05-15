@@ -1,6 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import ParallaxBackground from './ParallaxBackground';
 import styles from './SamajhSection.module.css';
 
 export default function SamajhSection() {
@@ -47,8 +48,9 @@ export default function SamajhSection() {
   ];
 
   return (
-    <section className={`${styles.section} section`} id="samajh" ref={ref}>
-      <div className="max-width">
+    <section className={`${styles.section} section`} id="samajh" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+      <ParallaxBackground targetRef={ref} />
+      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, y: 30 }}

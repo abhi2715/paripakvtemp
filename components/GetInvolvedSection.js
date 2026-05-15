@@ -1,6 +1,8 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import TiltCard from './TiltCard';
+import ParallaxBackground from './ParallaxBackground';
 import styles from './GetInvolvedSection.module.css';
 
 const cards = [
@@ -49,8 +51,9 @@ export default function GetInvolvedSection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className={`${styles.section} section`} id="get-involved" ref={ref}>
-      <div className="max-width">
+    <section className={`${styles.section} section`} id="get-involved" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+      <ParallaxBackground targetRef={ref} />
+      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, y: 30 }}
@@ -62,14 +65,13 @@ export default function GetInvolvedSection() {
 
         <div className={styles.grid}>
           {cards.map((card, i) => (
-            <motion.div
+            <TiltCard
               key={i}
               className={styles.card}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: 0.1 + i * 0.1, duration: 0.6, ease: 'easeOut' }}
-              whileHover={{ scale: 1.02, y: -4, borderColor: 'rgba(232,168,124,0.5)', boxShadow: '0 15px 30px rgba(0,0,0,0.3)' }}
             >
               <div className={styles.iconWrap}>{card.icon}</div>
               <h3 className={styles.cardTitle}>{card.title}</h3>
@@ -84,7 +86,7 @@ export default function GetInvolvedSection() {
                 </svg>
                 {card.cta}
               </a>
-            </motion.div>
+            </TiltCard>
           ))}
         </div>
       </div>

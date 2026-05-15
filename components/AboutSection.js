@@ -1,6 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import ParallaxBackground from './ParallaxBackground';
 import Image from 'next/image';
 import styles from './AboutSection.module.css';
 
@@ -25,8 +26,9 @@ export default function AboutSection() {
   };
 
   return (
-    <section className={`${styles.about} section`} id="about" ref={ref}>
-      <div className="max-width">
+    <section className={`${styles.about} section`} id="about" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+      <ParallaxBackground targetRef={ref} />
+      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, y: 30 }}

@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import TiltCard from './TiltCard';
+import ParallaxBackground from './ParallaxBackground';
 import styles from './OurProgrammes.module.css';
 
 const programs = [
@@ -32,8 +33,9 @@ export default function OurProgrammes() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="section" id="programmes" ref={ref} style={{ background: '#f9f4ef' }}>
-      <div className="max-width">
+    <section className="section" id="programmes" ref={ref} style={{ background: '#f9f4ef', position: 'relative', overflow: 'hidden' }}>
+      <ParallaxBackground targetRef={ref} opacity={0.05} />
+      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, scale: 0.9 }}

@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import ParallaxBackground from './ParallaxBackground';
 import Image from 'next/image';
 import styles from './NirmalaBrightScholar.module.css';
 
@@ -53,9 +54,23 @@ export default function NirmalaBrightScholar() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [isDragging, setIsDragging] = useState(false);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } }
+  };
+
   return (
-    <section className={`${styles.section} section`} id="nirmala" ref={ref}>
-      <div className="max-width">
+    <section className={`${styles.section} section`} id="nirmala" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+      <ParallaxBackground targetRef={ref} />
+      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, y: 30 }}
@@ -68,27 +83,27 @@ export default function NirmalaBrightScholar() {
         {/* Program Description */}
         <motion.div
           className={styles.programGrid}
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.7 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
         >
           <div className={styles.programText}>
-            <p>
+            <motion.p variants={itemVariants}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Nirmala Bright Scholar program
               is a holistic initiative that combines <strong>financial assistance</strong> with{' '}
               <strong>dedicated mentorship</strong> from industry professionals to empower bright, deserving
               students to reach their full potential.
-            </p>
-            <p>
+            </motion.p>
+            <motion.p variants={itemVariants}>
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
               Each scholar is carefully matched with a mentor based on their career aspirations, creating a
               personalised roadmap for success in their chosen field.
-            </p>
-            <p>
+            </motion.p>
+            <motion.p variants={itemVariants}>
               Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
               magni dolores eos qui ratione voluptatem sequi nesciunt. Our scholars demonstrate remarkable
               resilience and academic excellence.
-            </p>
+            </motion.p>
           </div>
 
           <div className={styles.programPoints}>

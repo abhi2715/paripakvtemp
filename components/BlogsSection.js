@@ -1,6 +1,8 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import TiltCard from './TiltCard';
+import ParallaxBackground from './ParallaxBackground';
 import Image from 'next/image';
 import styles from './BlogsSection.module.css';
 
@@ -39,8 +41,9 @@ export default function BlogsSection() {
   const seamlessBlogs = [...dummyBlogs, ...dummyBlogs, ...dummyBlogs];
 
   return (
-    <section className="section" id="blogs" ref={ref} style={{ background: '#f9f4ef' }}>
-      <div className="max-width">
+    <section className="section" id="blogs" ref={ref} style={{ background: '#f9f4ef', position: 'relative', overflow: 'hidden' }}>
+      <ParallaxBackground targetRef={ref} opacity={0.05} />
+      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -60,7 +63,7 @@ export default function BlogsSection() {
         >
           <div className={styles.track} style={{ animationPlayState: isInView ? 'running' : 'paused' }}>
             {seamlessBlogs.map((blog, i) => (
-              <div key={i} className={styles.blogCard}>
+              <TiltCard key={i} className={styles.blogCard}>
                 <div className={styles.imageWrap}>
                   <Image src={blog.image} alt={blog.title} fill sizes="350px" style={{ objectFit: 'cover' }} />
                 </div>
@@ -70,7 +73,7 @@ export default function BlogsSection() {
                   <p className={styles.excerpt}>{blog.excerpt}</p>
                   <a href="#blogs" className={styles.readMore}>Read More →</a>
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </motion.div>
