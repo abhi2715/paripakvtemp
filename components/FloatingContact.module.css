@@ -1,0 +1,73 @@
+.container {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #E8A87C;
+  color: #1d1d1d;
+  border: 2px solid #f9f4ef;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(232, 168, 124, 0.6);
+  transition: transform 0.25s;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px rgba(232, 168, 124, 0.4); }
+  100% { box-shadow: 0 0 30px rgba(232, 168, 124, 1); }
+}
+
+.fab:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.tooltip {
+  background: #1d1d1d;
+  border: 1px solid rgba(232, 168, 124, 0.3);
+  border-radius: 12px;
+  padding: 14px 18px;
+  min-width: 220px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.tooltip p {
+  font-size: 0.82rem;
+  color: rgba(240, 230, 220, 0.65);
+  margin-bottom: 6px;
+}
+
+.tooltip a {
+  font-size: 0.88rem;
+  color: #E8A87C;
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.tooltip a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .container {
+    bottom: 20px;
+    right: 20px;
+  }
+  .fab {
+    width: 48px;
+    height: 48px;
+  }
+}

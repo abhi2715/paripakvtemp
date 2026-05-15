@@ -1,0 +1,240 @@
+.hero {
+  position: relative;
+  height: 100dvh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px) brightness(0.5);
+  transform: scale(1.06);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(29, 29, 29, 0.82) 0%,
+    rgba(29, 29, 29, 0.65) 50%,
+    rgba(212, 132, 90, 0.25) 100%
+  );
+}
+
+/* ── Intro phase ── */
+.introWrap {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 300;
+  color: rgba(240, 230, 220, 0.7);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.nameRow {
+  display: flex;
+  gap: 4px;
+  perspective: 800px;
+}
+
+.nameLetter {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 700;
+  color: #E8A87C;
+  display: inline-block;
+  line-height: 1;
+  text-shadow: 0 0 60px rgba(232, 168, 124, 0.4);
+  filter: drop-shadow(0 4px 24px rgba(232,168,124,0.3));
+}
+
+.foundationText {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  font-weight: 300;
+  color: rgba(240, 230, 220, 0.85);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+}
+
+.scrollCue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  color: rgba(232, 168, 124, 0.7);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.scrollDot {
+  width: 10px;
+  height: 10px;
+  background: #E8A87C;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,168,124,0.5); }
+  50% { box-shadow: 0 0 0 10px rgba(232,168,124,0); }
+}
+
+/* ── Collage phase ── */
+.collageWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Marquee background */
+.marqueeContainer {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(-5deg) scale(1.2);
+  width: 100vw;
+  height: 60vh;
+  overflow: hidden;
+  opacity: 0.25;
+  z-index: 1;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  width: max-content;
+  animation: scroll 60s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); } /* Since images are duplicated 3x */
+}
+
+.marqueeItem {
+  position: relative;
+  width: 400px;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: transform 0.5s ease;
+}
+
+.marqueeItem:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.cellOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(29, 29, 29, 0.1),
+    rgba(29, 29, 29, 0.4)
+  );
+  pointer-events: none;
+}
+
+.collageTitle {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 24px;
+}
+
+.collageTitle h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  font-weight: 700;
+  color: #f0e6dc;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+.peach {
+  color: #E8A87C;
+}
+
+.collageTitle p {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 300;
+  color: rgba(240, 230, 220, 0.9);
+  margin-bottom: 32px;
+  line-height: 1.6;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+}
+
+.heroBtns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  background: #E8A87C;
+  color: #1d1d1d;
+  border-radius: 8px;
+  padding: 14px 36px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  display: inline-block;
+}
+
+.btnPrimary:hover {
+  background: #f2c4a0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232,168,124,0.4);
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .nameLetter {
+    font-size: clamp(2.8rem, 10vw, 5rem);
+  }
+  .marqueeItem {
+    width: 250px;
+  }
+}

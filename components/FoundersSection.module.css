@@ -1,0 +1,97 @@
+.founders {
+  background: #1d1d1d;
+}
+
+.title {
+  color: #E8A87C !important;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: linear-gradient(145deg, #2a2a2a, #222222);
+  border: 1px solid rgba(232, 168, 124, 0.15);
+  border-radius: 20px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+
+.card:hover {
+  border-color: rgba(232, 168, 124, 0.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E8A87C, #d4845a);
+  color: #1d1d1d;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 20px rgba(232, 168, 124, 0.25);
+}
+
+.name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #E8A87C;
+  margin-bottom: 4px;
+}
+
+.role {
+  font-size: 0.82rem;
+  color: rgba(240, 230, 220, 0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: block;
+}
+
+.bio {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(240, 230, 220, 0.75);
+  font-weight: 300;
+  text-align: justify;
+  margin-bottom: 24px;
+}
+
+.emailBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #E8A87C;
+  text-decoration: none;
+  border: 1px solid rgba(232, 168, 124, 0.35);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  transition: background 0.25s, border-color 0.25s;
+  margin-top: auto;
+}
+
+.emailBtn:hover {
+  background: rgba(232, 168, 124, 0.1);
+  border-color: #E8A87C;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

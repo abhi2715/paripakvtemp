@@ -1,0 +1,144 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  padding: 20px 0;
+}
+
+.card {
+  position: relative;
+  height: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111;
+  clip-path: inset(0 0 0 0 round 16px);
+}
+
+.imageWrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.textWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  z-index: 10;
+  will-change: opacity;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover .textWrap {
+  opacity: 0;
+}
+
+.card:hover .overlay {
+  opacity: 0;
+}
+
+.textWrap h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #E8A87C;
+  text-transform: uppercase;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .card {
+    height: 300px;
+  }
+  .textWrap {
+    padding: 24px;
+  }
+  .textWrap h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightboxContent {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 80vh;
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--peach);
+  color: var(--dark);
+}
+
+.lightboxImageWrap {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  background: #000;
+}
+
+.lightboxText {
+  padding: 20px;
+  text-align: center;
+  background: #111;
+  border-top: 1px solid #333;
+}
+
+.lightboxText h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  color: var(--peach);
+  margin: 0;
+}

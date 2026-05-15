@@ -1,0 +1,35 @@
+import Navbar from '../components/Navbar';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import FoundersSection from '../components/FoundersSection';
+import OurProgrammes from '../components/OurProgrammes';
+import NirmalaBrightScholar from '../components/NirmalaBrightScholar';
+import SamajhSection from '../components/SamajhSection';
+import GallerySection from '../components/GallerySection';
+import BlogsSection from '../components/BlogsSection';
+import GetInvolvedSection from '../components/GetInvolvedSection';
+import ContactSection from '../components/ContactSection';
+import FloatingContact from '../components/FloatingContact';
+import Footer from '../components/Footer';
+
+export default function Home() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <FoundersSection />
+        <OurProgrammes />
+        <NirmalaBrightScholar />
+        <SamajhSection />
+        <GallerySection />
+        <BlogsSection />
+        <GetInvolvedSection />
+        <ContactSection />
+      </main>
+      <Footer />
+      <FloatingContact />
+    </>
+  );
+}
