@@ -2,49 +2,36 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import ParallaxBackground from './ParallaxBackground';
-import Image from 'next/image';
 import styles from './NirmalaBrightScholar.module.css';
 
 const testimonials = [
   {
-    name: 'Priya Mehta',
-    role: 'Class XII Student, Delhi',
-    initials: 'PM',
-    avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&h=120&fit=crop&crop=face',
+    name: 'Yashashwini',
+    role: 'Commerce Student',
+    initials: 'YM',
     quote:
-      'The Nirmala Bright Scholar program changed my life. After losing my father, I thought my dreams of becoming a doctor were over. Paripakv not only provided financial support but also connected me with a mentor who guided me through my NEET preparation. Today I am in my first year of MBBS!',
+      'I am grateful to the Nirmala Bright Scholarship Program for supporting my education. This scholarship motivated me to study harder and move closer to my career goals. The financial assistance, guidance, and mentor support helped me grow not just academically but as a person.',
   },
   {
-    name: 'Arjun Singh',
-    role: 'Engineering Student, Pune',
-    initials: 'AS',
-    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=face',
+    name: 'Shakthi',
+    role: 'BBA Student',
+    initials: 'S',
     quote:
-      'I never imagined I could get into IIT. The mentorship I received through Paripakv was incredible. My mentor spent hours every week guiding me on problem-solving strategies. The scholarship covered my coaching fees and I cleared JEE Advanced!',
+      'During a difficult time financially and personally, the support and encouragement I received helped me continue my studies and believe in myself. The trainers and mentors were very supportive, motivating, and always ready to help us grow both personally and professionally. I am truly grateful for this opportunity and the positive impact it has made on my life.',
   },
   {
-    name: 'Kavita Nair',
-    role: 'Commerce Student, Mumbai',
-    initials: 'KN',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face',
+    name: 'Umapathy R.',
+    role: 'Parent & Educator',
+    initials: 'UR',
     quote:
-      'Being a first-generation student from my family to pursue higher education, I was lost. The Nirmala Bright Scholar program paired me with an amazing mentor from IIM who helped me understand career paths in finance. I am now pursuing CA.',
+      'When I was struggling to pay the fees for my daughter, the Nirmala Bright Scholarship program joined hands with us. They gave my daughter a new life, instilled confidence in her, and showed us the right path forward on our journey. I will always be grateful for their kindness.',
   },
   {
-    name: 'Rahul Verma',
-    role: 'Science Student, Lucknow',
-    initials: 'RV',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face',
+    name: 'Megha',
+    role: 'Engineering Student',
+    initials: 'M',
     quote:
-      'The scholarship covered my internet and books, which was crucial for my online coaching. The program is transparent and efficient. Every rupee goes directly to helping students like me. I qualified for JEE Mains and received a call from NIT.',
-  },
-  {
-    name: 'Sunita Gupta',
-    role: 'Arts Student, Jaipur',
-    initials: 'SG',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face',
-    quote:
-      "I was struggling to find direction after my mother passed away. Paripakv's mentors helped me discover my passion for design. They supported me with resources and confidence. I am now pursuing a degree in graphic design at a top college.",
+      'This scholarship gave me the support and financial assistance I needed to shape my goals and build a strong foundation for my career in engineering. It helped me focus on my studies without worrying about finances, and I am thankful for every opportunity it opened up.',
   },
 ];
 
@@ -164,15 +151,8 @@ export default function NirmalaBrightScholar() {
               <div className={styles.quoteIcon}>&ldquo;</div>
               <p className={styles.quote}>{t.quote}</p>
               <div className={styles.author}>
-                <div className={styles.authorAvatar}>
-                  <Image
-                    src={t.avatar}
-                    alt={t.name}
-                    width={48}
-                    height={48}
-                    draggable={false}
-                    style={{ objectFit: 'cover' }}
-                  />
+                <div className={styles.authorAvatar} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #E8A87C, #d4845a)', color: '#1d1d1d', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.5px' }}>
+                  {t.initials}
                 </div>
                 <div>
                   <div className={styles.authorName}>{t.name}</div>
