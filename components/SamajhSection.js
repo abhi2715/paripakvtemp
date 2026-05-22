@@ -49,7 +49,7 @@ export default function SamajhSection() {
 
   return (
     <section className={`${styles.section} section`} id="samajh" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} />
+      <ParallaxBackground targetRef={ref} image="/images/samajh-bg.png" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
@@ -57,7 +57,7 @@ export default function SamajhSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className={`section-title ${styles.title}`}>Samajh</h2>
+          <h2 className={`section-title ${styles.title}`}>समझ</h2>
         </motion.div>
 
         <div className={styles.content}>
@@ -70,7 +70,7 @@ export default function SamajhSection() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: 0.1, duration: 0.6, ease: 'easeOut' }}
             >
-              <img src="/images/Dreams-on-Streets.jpg" alt="Samajh" className={styles.dummyImage} />
+              <img src="/images/Hero section images/image 5.png" alt="Samajh" className={styles.dummyImage} />
             </motion.div>
             <motion.div
               className={styles.description}

@@ -5,11 +5,11 @@ import FoundersSection from '../components/FoundersSection';
 import OurProgrammes from '../components/OurProgrammes';
 import NirmalaBrightScholar from '../components/NirmalaBrightScholar';
 import SamajhSection from '../components/SamajhSection';
-import GallerySection from '../components/GallerySection';
+
 import BlogsSection from '../components/BlogsSection';
 import GetInvolvedSection from '../components/GetInvolvedSection';
 import ContactSection from '../components/ContactSection';
-import FloatingContact from '../components/FloatingContact';
+import AIChatbot from '../components/chatbot/AIChatbot';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -23,13 +23,13 @@ export default function Home() {
         <OurProgrammes />
         <NirmalaBrightScholar />
         <SamajhSection />
-        <GallerySection />
+
         <BlogsSection />
         <GetInvolvedSection />
         <ContactSection />
       </main>
       <Footer />
-      <FloatingContact />
+      <AIChatbot />
     </>
   );
 }

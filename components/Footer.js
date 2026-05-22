@@ -15,9 +15,16 @@ export default function Footer() {
         </div>
 
         <div className={styles.links}>
-          {['About', 'Founders', 'Nirmala Bright Scholar', 'Samajh', 'Get Involved', 'Contact'].map((l) => (
-            <a key={l} href={`#${l.toLowerCase().replace(/ /g, '-')}`} className={styles.link}>
-              {l}
+          {[
+            { label: 'About', href: '#about' },
+            { label: 'Founders', href: '#founders' },
+            { label: 'निर्मला Bright Scholar', href: '#nirmala' },
+            { label: 'समझ', href: '#samajh' },
+            { label: 'Get Involved', href: '#get-involved' },
+            { label: 'Contact', href: '#contact' },
+          ].map((l) => (
+            <a key={l.href} href={l.href} className={styles.link}>
+              {l.label}
             </a>
           ))}
         </div>

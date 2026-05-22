@@ -36,7 +36,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .tagline {
@@ -50,8 +50,9 @@
 
 .nameRow {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   perspective: 800px;
+  margin: 8px 0;
 }
 
 .nameLetter {
@@ -63,6 +64,31 @@
   line-height: 1;
   text-shadow: 0 0 60px rgba(232, 168, 124, 0.4);
   filter: drop-shadow(0 4px 24px rgba(232,168,124,0.3));
+}
+
+/* Hindi Devanagari syllable animation */
+.hindiLetter {
+  font-family: 'Noto Serif Devanagari', serif;
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  font-weight: 700;
+  color: #E8A87C;
+  display: inline-block;
+  line-height: 1.15;
+  text-shadow:
+    0 0 100px rgba(232, 168, 124, 0.4),
+    0 0 40px rgba(232, 168, 124, 0.2);
+  filter: drop-shadow(0 6px 30px rgba(232,168,124,0.3));
+}
+
+/* English transliteration text below Hindi */
+.transliteration {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  color: rgba(232, 168, 124, 0.4);
+  letter-spacing: 14px;
+  text-transform: uppercase;
+  margin-top: -2px;
 }
 
 .foundationText {
@@ -118,7 +144,7 @@
   width: 100vw;
   height: 60vh;
   overflow: hidden;
-  opacity: 0.25;
+  opacity: 1;
   z-index: 1;
 }
 
@@ -171,13 +197,13 @@
 }
 
 .collageTitle h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  font-family: 'Playfair Display', 'Outfit', serif;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
   font-weight: 700;
   color: #f0e6dc;
   line-height: 1.1;
-  margin-bottom: 16px;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  margin-bottom: 18px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.6);
 }
 
 .peach {
@@ -186,12 +212,12 @@
 
 .collageTitle p {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1rem, 2vw, 1.15rem);
   font-weight: 300;
-  color: rgba(240, 230, 220, 0.9);
-  margin-bottom: 32px;
-  line-height: 1.6;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+  color: rgba(240, 230, 220, 0.85);
+  margin-bottom: 36px;
+  line-height: 1.7;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
 }
 
 .heroBtns {
@@ -202,23 +228,23 @@
 }
 
 .btnPrimary {
-  background: #E8A87C;
-  color: #1d1d1d;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #E8A87C, #d4845a);
+  color: #0f0f0f;
+  border-radius: 10px;
   padding: 14px 36px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  transition: transform 0.3s, box-shadow 0.3s;
   display: inline-block;
+  border: none;
 }
 
 .btnPrimary:hover {
-  background: #f2c4a0;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(232,168,124,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(232,168,124,0.4);
 }
 
 .scrollIndicator {
@@ -233,6 +259,13 @@
 @media (max-width: 640px) {
   .nameLetter {
     font-size: clamp(2.8rem, 10vw, 5rem);
+  }
+  .hindiLetter {
+    font-size: clamp(2.5rem, 9vw, 4rem);
+  }
+  .transliteration {
+    letter-spacing: 8px;
+    font-size: 0.8rem;
   }
   .marqueeItem {
     width: 250px;

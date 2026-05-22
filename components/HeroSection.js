@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import styles from './HeroSection.module.css';
 
-const LETTERS = 'PARIPAKV'.split('');
+// Hindi syllable units for the intro animation
+const HINDI_SYLLABLES = ['प', 'रि', 'प', 'क्व'];
 
 export default function HeroSection() {
   const [phase, setPhase] = useState('intro'); // intro | collage
@@ -13,19 +14,21 @@ export default function HeroSection() {
 
   // After letters animate in, wait then show collage
   useEffect(() => {
-    const t1 = setTimeout(() => setLettersDone(true), LETTERS.length * 120 + 800);
-    const t2 = setTimeout(() => setPhase('collage'), LETTERS.length * 120 + 2200);
+    const t1 = setTimeout(() => setLettersDone(true), HINDI_SYLLABLES.length * 180 + 800);
+    const t2 = setTimeout(() => setPhase('collage'), HINDI_SYLLABLES.length * 180 + 2600);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   // Using the user-provided images
   const localImages = [
-    '/images/Dreams-on-Streets.jpg',
-    '/images/MASK-1.jpg',
-    '/images/banner-1-1.jpg',
-    '/images/education.jpg',
-    '/images/image1.jpg',
-    '/images/images.jpeg'
+    '/images/Hero section images/image 2.png',
+    '/images/Hero section images/image 3.png',
+    '/images/Hero section images/image 4.png',
+    '/images/Hero section images/image 5.png',
+    '/images/Hero section images/image 6.png',
+    '/images/Hero section images/image 7.png',
+    '/images/Hero section images/image 8.png',
+    '/images/Hero section images/image 9.png',
   ];
   
   // Duplicate images to create a seamless infinite scrolling loop
@@ -56,28 +59,38 @@ export default function HeroSection() {
             </motion.p>
 
             <div className={styles.nameRow}>
-              {LETTERS.map((letter, i) => (
+              {HINDI_SYLLABLES.map((syllable, i) => (
                 <motion.span
                   key={i}
-                  className={styles.nameLetter}
-                  initial={{ opacity: 0, y: 60, rotateX: -90 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  className={styles.hindiLetter}
+                  initial={{ opacity: 0, y: 50, scale: 0.7, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
                   transition={{
-                    delay: i * 0.12,
-                    duration: 0.55,
+                    delay: i * 0.18,
+                    duration: 0.7,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
-                  {letter}
+                  {syllable}
                 </motion.span>
               ))}
             </div>
+
+            {/* English transliteration below */}
+            <motion.p
+              className={styles.transliteration}
+              initial={{ opacity: 0, y: 10 }}
+              animate={lettersDone ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              PARIPAKV
+            </motion.p>
 
             <motion.p
               className={styles.foundationText}
               initial={{ opacity: 0, y: 20 }}
               animate={lettersDone ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
             >
               Foundation
             </motion.p>

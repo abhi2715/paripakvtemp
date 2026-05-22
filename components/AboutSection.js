@@ -27,7 +27,7 @@ export default function AboutSection() {
 
   return (
     <section className={`${styles.about} section`} id="about" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} />
+      <ParallaxBackground targetRef={ref} image="/images/about-bg.png" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
@@ -47,7 +47,7 @@ export default function AboutSection() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <div className={styles.dummyImageWrap}>
-              <Image src="/images/education.jpg" alt="About Paripakv" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', borderRadius: '16px' }} />
+              <Image src="/images/about-bg.png" alt="About Paripakv" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', borderRadius: '16px' }} />
             </div>
           </motion.div>
           <motion.div

@@ -39,6 +39,7 @@ export default function NirmalaBrightScholar() {
   const ref = useRef(null);
   const trackRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isTestimonialsInView = useInView(trackRef, { once: true, margin: '-80px' });
   const [isDragging, setIsDragging] = useState(false);
 
   const containerVariants = {
@@ -55,16 +56,17 @@ export default function NirmalaBrightScholar() {
   };
 
   return (
-    <section className={`${styles.section} section`} id="nirmala" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} />
-      <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
+    <>
+      <section className={`${styles.section} section`} id="nirmala" ref={ref} style={{ position: 'relative', overflow: 'hidden', paddingBottom: '60px' }}>
+        <ParallaxBackground targetRef={ref} image="/images/nirmala-bg.png" opacity={0.15} />
+        <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className={`section-title ${styles.title}`}>Nirmala Bright Scholar</h2>
+          <h2 className={`section-title ${styles.title}`}>निर्मला Bright Scholar</h2>
         </motion.div>
 
         {/* Program Description */}
@@ -76,29 +78,35 @@ export default function NirmalaBrightScholar() {
         >
           <div className={styles.programText}>
             <motion.p variants={itemVariants}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Nirmala Bright Scholar program
-              is a holistic initiative that combines <strong>financial assistance</strong> with{' '}
-              <strong>dedicated mentorship</strong> from industry professionals to empower bright, deserving
-              students to reach their full potential.
+              The objective of this program is to provide <strong>financial assistance &amp; education support services</strong> to
+              students who have financial constraints and yet have a clear demonstration of ambition, goal and
+              capability towards building a career for themselves.
             </motion.p>
             <motion.p variants={itemVariants}>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-              Each scholar is carefully matched with a mentor based on their career aspirations, creating a
-              personalised roadmap for success in their chosen field.
+              It is a <strong>dual program</strong> which combines financial assistance with{' '}
+              <strong>mentorship from professionals</strong>. Students studying in Class 11 and 12 will be
+              entitled to receive a scholarship to cover their academic expenses and mentorship from a
+              professional for Coaching, Career Counselling and Life Skills.
             </motion.p>
             <motion.p variants={itemVariants}>
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-              magni dolores eos qui ratione voluptatem sequi nesciunt. Our scholars demonstrate remarkable
-              resilience and academic excellence.
+              This is an <strong>aptitude-based scholarship</strong> for students who are studying in 11th or 12th class,
+              enrolled and continuing their education, and open for Indian nationals only. Allowance for academic
+              expenses is provided on a monthly basis for purposes such as internet, device, books, stationery,
+              and online learning.
+            </motion.p>
+            <motion.p variants={itemVariants}>
+              Duration of the scholarship is annual, coinciding with the academic year, subject to review of performance,
+              utilisation pattern and continued state of crisis/need. The student should <strong>not</strong> be a recipient
+              of any other scholarships or financial assistance of any kind.
             </motion.p>
           </div>
 
           <div className={styles.programPoints}>
             {[
-              { num: '01', text: 'Financial scholarship covering academic expenses – internet, books, stationery, and coaching fees.' },
-              { num: '02', text: 'One-on-one mentorship from professionals from IIM, IIT and top industry leaders.' },
-              { num: '03', text: 'Career counselling and life skills sessions every month with your assigned mentor.' },
-              { num: '04', text: 'Aptitude-based selection ensuring maximum impact for every rupee donated.' },
+              { num: '01', text: 'Financial scholarship covering academic expenses – internet, device, books, stationery, online learning & coaching fees on a monthly basis.' },
+              { num: '02', text: 'One-on-one mentorship from professionals (IIM, IIT & top industry leaders) for Career Counselling and Life Skills.' },
+              { num: '03', text: 'Multi-stage aptitude-based selection combining need assessment with academic rigour, soft skills evaluation, and video/in-person interviews.' },
+              { num: '04', text: 'Students must demonstrate clarity of goal, maintain minimum performance standards, proactively connect with mentors monthly, and show integrity in fund utilisation.' },
             ].map((p, i) => (
               <motion.div
                 key={i}
@@ -115,6 +123,36 @@ export default function NirmalaBrightScholar() {
           </div>
         </motion.div>
 
+        {/* Eligibility & Documents */}
+        <motion.div
+          className={styles.detailsGrid}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
+        >
+          <div className={styles.detailCard}>
+            <h4 className={styles.detailTitle}>Selection Process</h4>
+            <ul className={styles.detailList}>
+              <li>Initial shortlisting by school based on academic performance &amp; soft skills assessment</li>
+              <li>Qualitative evaluation of clarity of thought, attitude &amp; problem-solving ability</li>
+              <li>Video / in-person interview of shortlisted candidates</li>
+              <li>Document verification for final selection</li>
+            </ul>
+          </div>
+          <div className={styles.detailCard}>
+            <h4 className={styles.detailTitle}>Documents Required</h4>
+            <ul className={styles.detailList}>
+              <li>Last 4 years mark sheets</li>
+              <li>10th Board mark sheet</li>
+              <li>Latest mark sheet certified by school</li>
+              <li>Short essay (500–1000 words) on &ldquo;What I want to be and how the scholarship will help&rdquo;</li>
+              <li>Aadhaar &amp; bank details</li>
+              <li>Demand proof – bill from college/school</li>
+            </ul>
+          </div>
+        </motion.div>
+
         {/* Email CTA */}
         <motion.div
           className={styles.emailCta}
@@ -127,43 +165,47 @@ export default function NirmalaBrightScholar() {
           </a>
         </motion.div>
       </div>
+    </section>
 
       {/* ── Testimonials ── */}
-      <div className={styles.testimonialsWrap}>
-        <motion.h3
-          className={styles.testimonialsHeading}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6, duration: 0.5 }}
-        >
-          What Our Scholars Say
-        </motion.h3>
+      <section className={styles.testimonialsWrap} ref={trackRef} style={{ position: 'relative', overflow: 'hidden' }}>
+        <ParallaxBackground targetRef={trackRef} image="/images/testimonials-bg.png" opacity={0.15} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <motion.h3
+            className={styles.testimonialsHeading}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isTestimonialsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            What Our Scholars Say
+          </motion.h3>
 
-        <motion.div
-          className={styles.trackContainer}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        >
-          <div className={styles.track} style={{ animationPlayState: isInView ? 'running' : 'paused' }}>
-            {[...testimonials, ...testimonials].map((t, i) => (
-            <div key={i} className={styles.testimonialCard}>
-              <div className={styles.quoteIcon}>&ldquo;</div>
-              <p className={styles.quote}>{t.quote}</p>
-              <div className={styles.author}>
-                <div className={styles.authorAvatar} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #E8A87C, #d4845a)', color: '#1d1d1d', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.5px' }}>
-                  {t.initials}
-                </div>
-                <div>
-                  <div className={styles.authorName}>{t.name}</div>
-                  <div className={styles.authorRole}>{t.role}</div>
+          <motion.div
+            className={styles.trackContainer}
+            initial={{ opacity: 0 }}
+            animate={isTestimonialsInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <div className={styles.track} style={{ animationPlayState: isTestimonialsInView ? 'running' : 'paused' }}>
+              {[...testimonials, ...testimonials].map((t, i) => (
+              <div key={i} className={styles.testimonialCard}>
+                <div className={styles.quoteIcon}>&ldquo;</div>
+                <p className={styles.quote}>{t.quote}</p>
+                <div className={styles.author}>
+                  <div className={styles.authorAvatar} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #E8A87C, #d4845a)', color: '#1d1d1d', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.5px' }}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className={styles.authorName}>{t.name}</div>
+                    <div className={styles.authorRole}>{t.role}</div>
+                  </div>
                 </div>
               </div>
+            ))}
             </div>
-          ))}
+          </motion.div>
         </div>
-        </motion.div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

@@ -12,7 +12,7 @@ const programs = [
         <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
       </svg>
     ),
-    title: 'SAMAJH',
+    title: 'समझ',
     desc: 'Training and mentoring middle school teachers in core subjects to build a strong conceptual foundation for students.',
     color: '#E8A87C'
   },
@@ -22,7 +22,7 @@ const programs = [
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
     ),
-    title: 'NIRMALA BRIGHT SCHOLAR',
+    title: 'निर्मला BRIGHT SCHOLAR',
     desc: 'Mentorship and financial support for exceptionally bright underprivileged youth pursuing higher education.',
     color: '#E8A87C'
   }
@@ -34,7 +34,7 @@ export default function OurProgrammes() {
 
   return (
     <section className="section" id="programmes" ref={ref} style={{ background: '#f9f4ef', position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} opacity={0.05} />
+      <ParallaxBackground targetRef={ref} image="/images/programmes-bg.jpeg" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"

@@ -1,14 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   --peach: #E8A87C;
   --peach-light: #f2c4a0;
   --peach-dark: #d4845a;
-  --dark: #1d1d1d;
-  --dark-mid: #2a2a2a;
-  --dark-light: #3a3a3a;
+  --peach-glow: rgba(232, 168, 124, 0.35);
+  --gold: #d4a574;
+  --gold-light: #e8c9a0;
+  --dark: #0f0f0f;
+  --dark-mid: #1a1a1a;
+  --dark-card: #151515;
+  --dark-light: #242424;
   --white: #f9f4ef;
+  --cream: #faf5ef;
   --text-light: #f0e6dc;
+  --text-muted: rgba(240, 230, 220, 0.6);
+  --accent-warm: #c77d4a;
+  --section-gap: 0;
 }
 
 * {
@@ -28,6 +36,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Subtle grain texture on body */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 ::selection {
   background: var(--peach);
   color: var(--dark);
@@ -41,16 +60,17 @@ body {
   background: var(--dark);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--peach-dark);
+  background: linear-gradient(180deg, var(--peach-dark), var(--peach));
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--peach);
+  background: var(--peach-light);
 }
 
 /* ─── Section base ─── */
 .section {
-  padding: 100px 0;
+  padding: 120px 0;
+  position: relative;
 }
 
 .max-width {
@@ -61,11 +81,13 @@ body {
 
 .section-title {
   text-align: center;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
   margin-bottom: 20px;
   position: relative;
   display: inline-block;
+  font-family: 'Playfair Display', 'Noto Serif Devanagari', serif;
+  letter-spacing: -0.5px;
 }
 
 .section-title-wrap {

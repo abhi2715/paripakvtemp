@@ -42,7 +42,7 @@ export default function BlogsSection() {
 
   return (
     <section className="section" id="blogs" ref={ref} style={{ background: '#f9f4ef', position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} opacity={0.05} />
+      <ParallaxBackground targetRef={ref} image="/images/background.jpeg" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
