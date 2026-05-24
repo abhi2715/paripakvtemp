@@ -8,7 +8,7 @@ const navLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
   { href: '#founders', label: 'Founders' },
-  { href: '#nirmala', label: 'निर्मला Bright Scholar' },
+  { href: '#nirmala', label: 'निर्मला Bright Scholars' },
   { href: '#samajh', label: 'समझ' },
   { href: '#get-involved', label: 'Get Involved' },
   { href: '#contact', label: 'Contact Us' },

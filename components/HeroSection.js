@@ -126,11 +126,11 @@ export default function HeroSection() {
               transition={{ delay: 0.3, duration: 0.7 }}
             >
               <h1>
-                <span className={styles.peach}>Paripakv</span> Foundation
+                <span className={styles.peach}>Paripakv</span> <span className={styles.foundationGrey}>Foundation</span>
               </h1>
               <p>Empowering underprivileged students through quality education</p>
               <div className={styles.heroBtns}>
-                <a href="#about" className="btn-outline">Our Story</a>
+                <a href="#about" className={styles.btnOutline}>Our Story</a>
                 <a href="#contact" className={styles.btnPrimary}>Get Involved</a>
               </div>
             </motion.div>

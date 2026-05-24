@@ -1,6 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 import TiltCard from './TiltCard';
 import ParallaxBackground from './ParallaxBackground';
 import styles from './FoundersSection.module.css';
@@ -10,7 +11,9 @@ const founders = [
     name: 'Pooja Sharma',
     role: 'Co-Founder',
     initials: 'PS',
-    bio: 'Pooja Sharma has spent 25 years being a technologist for the banking industry. She holds an MBA from Indian Institute of Management, Bangalore in Finance & International Business. Besides work, she actively supports the causes of education and women empowerment. She has been associated with schools for the underprivileged in the Gurgaon area for the last 2 years.',
+    image: '/images/pooja-sharma-v2.jpeg',
+    imagePosition: 'top',
+    bio: 'Pooja Sharma is a seasoned technology leader with over 25 years of experience in the banking industry. She holds an MBA from the Indian Institute of Management Bangalore, specializing in Finance and International Business. She is deeply committed to paying it forward and actively champions initiatives in education and women’s empowerment.',
   },
   {
     name: 'Harmendra Gandhi',
@@ -48,7 +51,13 @@ export default function FoundersSection() {
               transition={{ delay: 0.2 + i * 0.2, duration: 0.9, type: 'spring', bounce: 0.4 }}
             >
               {/* Avatar */}
-              <div className={styles.avatar}>{f.initials}</div>
+              <div className={styles.avatar}>
+                {f.image ? (
+                  <Image src={f.image} alt={f.name} fill sizes="80px" style={{ objectFit: 'cover', objectPosition: f.imagePosition || 'center' }} />
+                ) : (
+                  f.initials
+                )}
+              </div>
               <h3 className={styles.name}>{f.name}</h3>
               <span className={styles.role}>{f.role}</span>
               <p className={styles.bio}>{f.bio}</p>

@@ -8,23 +8,23 @@ import styles from './OurProgrammes.module.css';
 const programs = [
   {
     icon: (
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E8A87C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d4845a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
       </svg>
     ),
     title: 'समझ',
     desc: 'Training and mentoring middle school teachers in core subjects to build a strong conceptual foundation for students.',
-    color: '#E8A87C'
+    color: '#d4845a'
   },
   {
     icon: (
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E8A87C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d4845a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
     ),
-    title: 'निर्मला BRIGHT SCHOLAR',
+    title: 'निर्मला BRIGHT SCHOLARS',
     desc: 'Mentorship and financial support for exceptionally bright underprivileged youth pursuing higher education.',
-    color: '#E8A87C'
+    color: '#d4845a'
   }
 ];
 
@@ -34,7 +34,7 @@ export default function OurProgrammes() {
 
   return (
     <section className="section" id="programmes" ref={ref} style={{ background: '#f9f4ef', position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} image="/images/programmes-bg.jpeg" opacity={0.15} />
+      <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 8.png" opacity={0.07} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"

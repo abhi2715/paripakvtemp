@@ -7,7 +7,7 @@ export default function ParallaxBackground({ targetRef, opacity = 0.03, image = 
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["-3%", "3%"]);
 
   return (
     <motion.div 

@@ -97,18 +97,18 @@ export default function ContactSection() {
               </div>
             </motion.div>
 
-            <motion.div className={styles.socialRow} variants={itemVariants}>
-              <a
-                href="https://github.com/paripakvfoundation"
-                target="_blank"
-                rel="noreferrer"
-                className={styles.socialBtn}
-                aria-label="GitHub"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+            <motion.div className={styles.contactItem} variants={itemVariants}>
+              <div className={styles.contactIcon}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#E8A87C">
+                  <path d="M22.23 0H1.77C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.729V1.729C24 .774 23.208 0 22.23 0zM7.069 20.452H3.554V9.034h3.515v11.418zM5.312 7.542c-1.127 0-2.041-.912-2.041-2.04 0-1.127.913-2.04 2.041-2.04s2.04.913 2.04 2.04c0 1.128-.913 2.04-2.04 2.04zm15.14 12.91h-3.515v-5.559c0-1.326-.026-3.037-1.848-3.037-1.85 0-2.134 1.445-2.134 2.938v5.658H9.44V9.034h3.373v1.56h.048c.47-.887 1.618-1.821 3.33-1.821 3.563 0 4.223 2.343 4.223 5.39v6.289h-.001z"/>
                 </svg>
-              </a>
+              </div>
+              <div>
+                <span className={styles.contactLabel}>Social</span>
+                <a href="https://www.linkedin.com/in/paripakv-foundation-753653410/" target="_blank" rel="noreferrer" className={styles.contactValue}>
+                  Paripakv Foundation
+                </a>
+              </div>
             </motion.div>
           </motion.div>
 

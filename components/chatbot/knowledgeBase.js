@@ -30,7 +30,7 @@ const KNOWLEDGE_BASE = [
     id: 'founder-pooja',
     category: 'Founders',
     title: 'Co-Founder: Pooja Sharma',
-    content: `Pooja Sharma is a Co-Founder of Paripakv Foundation. She has spent 25 years being a technologist for the banking industry. She holds an MBA from Indian Institute of Management, Bangalore (IIM-B) in Finance & International Business. Besides work, she actively supports the causes of education and women empowerment. She has been associated with schools for the underprivileged in the Gurgaon area for the last 2 years.`,
+    content: `Pooja Sharma is a Co-Founder of Paripakv Foundation. She is a seasoned technology leader with over 25 years of experience in the banking industry. She holds an MBA from the Indian Institute of Management Bangalore, specializing in Finance and International Business. She is deeply committed to paying it forward and actively champions initiatives in education and women’s empowerment.`,
     keywords: ['pooja', 'sharma', 'founder', 'co-founder', 'iim', 'bangalore', 'banking', 'technology', 'women', 'empowerment', 'gurgaon', 'who founded']
   },
   {
@@ -140,7 +140,7 @@ const KNOWLEDGE_BASE = [
     id: 'contact-info',
     category: 'Contact',
     title: 'Contact Information',
-    content: `You can reach Paripakv Foundation by email at paripakvfoundation@gmail.com. Their headquarters is in India with Pan-India Programs across multiple states. They respond within 24 hours. Whether you want to donate, volunteer, apply for a scholarship, or simply learn more about their work — they are here for you. You can also find them on GitHub at github.com/paripakvfoundation.`,
+    content: `You can reach Paripakv Foundation by email at paripakvfoundation@gmail.com. Their headquarters is in India with Pan-India Programs across multiple states. They respond within 24 hours. Whether you want to donate, volunteer, apply for a scholarship, or simply learn more about their work — they are here for you. You can also find them on LinkedIn at linkedin.com/in/paripakv-foundation-753653410.`,
     keywords: ['contact', 'email', 'reach', 'phone', 'address', 'location', 'headquarters', 'india', 'how to contact', 'get in touch', 'talk to', 'call']
   },
 

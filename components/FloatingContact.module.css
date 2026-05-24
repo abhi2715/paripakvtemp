@@ -15,13 +15,13 @@
   border-radius: 50%;
   background: #E8A87C;
   color: #1d1d1d;
-  border: 2px solid #f9f4ef;
+  border: 3px solid #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 15px rgba(232, 168, 124, 0.6);
-  transition: transform 0.25s;
+  transition: transform 0.25s, border-color 0.25s;
   animation: glow 2s infinite alternate;
 }
 

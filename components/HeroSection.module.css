@@ -15,17 +15,16 @@
   background-position: center;
   filter: blur(2px) brightness(0.5);
   transform: scale(1.06);
+  opacity: 0.65;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    160deg,
-    rgba(29, 29, 29, 0.82) 0%,
-    rgba(29, 29, 29, 0.65) 50%,
-    rgba(212, 132, 90, 0.25) 100%
-  );
+  background: linear-gradient(160deg,
+      rgba(29, 29, 29, 0.82) 0%,
+      rgba(29, 29, 29, 0.65) 50%,
+      rgba(212, 132, 90, 0.25) 100%);
 }
 
 /* ── Intro phase ── */
@@ -58,35 +57,37 @@
 .nameLetter {
   font-family: 'Outfit', sans-serif;
   font-size: clamp(4rem, 12vw, 9rem);
-  font-weight: 700;
+  font-weight: 800;
   color: #E8A87C;
   display: inline-block;
   line-height: 1;
   text-shadow: 0 0 60px rgba(232, 168, 124, 0.4);
-  filter: drop-shadow(0 4px 24px rgba(232,168,124,0.3));
+  filter: drop-shadow(0 4px 24px rgba(232, 168, 124, 0.3));
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Hindi Devanagari syllable animation */
 .hindiLetter {
   font-family: 'Noto Serif Devanagari', serif;
   font-size: clamp(3.5rem, 10vw, 7.5rem);
-  font-weight: 700;
+  font-weight: 800;
   color: #E8A87C;
   display: inline-block;
   line-height: 1.15;
   text-shadow:
     0 0 100px rgba(232, 168, 124, 0.4),
     0 0 40px rgba(232, 168, 124, 0.2);
-  filter: drop-shadow(0 6px 30px rgba(232,168,124,0.3));
+  filter: drop-shadow(0 6px 30px rgba(232, 168, 124, 0.3));
+  -webkit-font-smoothing: antialiased;
 }
 
 /* English transliteration text below Hindi */
 .transliteration {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
-  font-weight: 300;
-  color: rgba(232, 168, 124, 0.4);
-  letter-spacing: 14px;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 700;
+  color: rgba(232, 168, 124, 0.8);
+  letter-spacing: 16px;
   text-transform: uppercase;
   margin-top: -2px;
 }
@@ -94,8 +95,9 @@
 .foundationText {
   font-family: 'Outfit', sans-serif;
   font-size: clamp(1.4rem, 4vw, 2.4rem);
-  font-weight: 300;
-  color: rgba(240, 230, 220, 0.85);
+  font-weight: 400;
+  color: rgba(240, 230, 220, 0.6);
+  /* Muted grey to match menu non-active links */
   letter-spacing: 8px;
   text-transform: uppercase;
 }
@@ -121,8 +123,15 @@
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232,168,124,0.5); }
-  50% { box-shadow: 0 0 0 10px rgba(232,168,124,0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 168, 124, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(232, 168, 124, 0);
+  }
 }
 
 /* ── Collage phase ── */
@@ -144,7 +153,7 @@
   width: 100vw;
   height: 60vh;
   overflow: hidden;
-  opacity: 1;
+  opacity: 75%;
   z-index: 1;
 }
 
@@ -153,12 +162,19 @@
   gap: 20px;
   height: 100%;
   width: max-content;
-  animation: scroll 60s linear infinite;
+  animation: scroll 120s linear infinite;
 }
 
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-33.33%); } /* Since images are duplicated 3x */
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-33.33%);
+  }
+
+  /* Since images are duplicated 3x */
 }
 
 .marqueeItem {
@@ -167,7 +183,7 @@
   height: 100%;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: transform 0.5s ease;
 }
 
@@ -179,11 +195,9 @@
 .cellOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(29, 29, 29, 0.1),
-    rgba(29, 29, 29, 0.4)
-  );
+  background: linear-gradient(to bottom,
+      rgba(29, 29, 29, 0.1),
+      rgba(29, 29, 29, 0.4));
   pointer-events: none;
 }
 
@@ -203,21 +217,29 @@
   color: #f0e6dc;
   line-height: 1.1;
   margin-bottom: 18px;
-  text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
 }
 
 .peach {
   color: #E8A87C;
 }
 
+.foundationGrey {
+  color: #c0c0c0;
+  /* Increased opacity grey */
+}
+
 .collageTitle p {
   font-family: 'Inter', sans-serif;
   font-size: clamp(1rem, 2vw, 1.15rem);
-  font-weight: 300;
-  color: rgba(240, 230, 220, 0.85);
+  font-weight: 500;
+  /* Increased thickness */
+  color: #d0d0d0;
+  /* Light grey */
   margin-bottom: 36px;
   line-height: 1.7;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.6);
+  /* Stronger shadow for visibility */
 }
 
 .heroBtns {
@@ -244,7 +266,32 @@
 
 .btnPrimary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 36px rgba(232,168,124,0.4);
+  box-shadow: 0 12px 36px rgba(232, 168, 124, 0.4);
+}
+
+.btnOutline {
+  background: rgba(15, 15, 15, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #E8A87C;
+  border: 2px solid #E8A87C;
+  border-radius: 10px;
+  padding: 12px 34px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.btnOutline:hover {
+  background: #E8A87C;
+  color: #0f0f0f;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(232, 168, 124, 0.3);
 }
 
 .scrollIndicator {
@@ -260,13 +307,16 @@
   .nameLetter {
     font-size: clamp(2.8rem, 10vw, 5rem);
   }
+
   .hindiLetter {
     font-size: clamp(2.5rem, 9vw, 4rem);
   }
+
   .transliteration {
     letter-spacing: 8px;
     font-size: 0.8rem;
   }
+
   .marqueeItem {
     width: 250px;
   }

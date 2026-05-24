@@ -143,16 +143,11 @@
 
 .track {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
-  padding: 16px 40px 16px;
-  width: max-content;
-  animation: slide 40s linear infinite;
-  animation-play-state: paused;
-}
-
-@keyframes slide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 12px)); }
+  padding: 16px 40px 32px;
+  width: 100%;
 }
 
 .testimonialCard {

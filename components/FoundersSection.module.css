@@ -31,6 +31,8 @@
 }
 
 .avatar {
+  position: relative;
+  overflow: hidden;
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -77,7 +79,7 @@
   gap: 8px;
   color: #E8A87C;
   text-decoration: none;
-  border: 1px solid rgba(232, 168, 124, 0.35);
+  border: 2px solid #E8A87C;
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 0.88rem;

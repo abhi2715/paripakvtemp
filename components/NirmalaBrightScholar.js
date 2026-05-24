@@ -4,32 +4,45 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import ParallaxBackground from './ParallaxBackground';
 import styles from './NirmalaBrightScholar.module.css';
 
+const MaleIcon = () => (
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM18 21v-2a4 4 0 0 0-4-4H10a4 4 0 0 0-4 4v2"/>
+  </svg>
+);
+
+const FemaleIcon = () => (
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM18 21v-2a4 4 0 0 0-4-4H10a4 4 0 0 0-4 4v2"/>
+    <path d="M8.5 7.5v4c0 1.5.5 2 1.5 3M15.5 7.5v4c0 1.5-.5 2-1.5 3"/>
+  </svg>
+);
+
 const testimonials = [
   {
-    name: 'Yashashwini',
+    name: 'Student',
     role: 'Commerce Student',
-    initials: 'YM',
+    gender: 'female',
     quote:
       'I am grateful to the Nirmala Bright Scholarship Program for supporting my education. This scholarship motivated me to study harder and move closer to my career goals. The financial assistance, guidance, and mentor support helped me grow not just academically but as a person.',
   },
   {
-    name: 'Shakthi',
+    name: 'Student',
     role: 'BBA Student',
-    initials: 'S',
+    gender: 'female',
     quote:
       'During a difficult time financially and personally, the support and encouragement I received helped me continue my studies and believe in myself. The trainers and mentors were very supportive, motivating, and always ready to help us grow both personally and professionally. I am truly grateful for this opportunity and the positive impact it has made on my life.',
   },
   {
-    name: 'Umapathy R.',
+    name: 'Parent',
     role: 'Parent & Educator',
-    initials: 'UR',
+    gender: 'male',
     quote:
       'When I was struggling to pay the fees for my daughter, the Nirmala Bright Scholarship program joined hands with us. They gave my daughter a new life, instilled confidence in her, and showed us the right path forward on our journey. I will always be grateful for their kindness.',
   },
   {
-    name: 'Megha',
+    name: 'Student',
     role: 'Engineering Student',
-    initials: 'M',
+    gender: 'female',
     quote:
       'This scholarship gave me the support and financial assistance I needed to shape my goals and build a strong foundation for my career in engineering. It helped me focus on my studies without worrying about finances, and I am thankful for every opportunity it opened up.',
   },
@@ -66,7 +79,7 @@ export default function NirmalaBrightScholar() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className={`section-title ${styles.title}`}>निर्मला Bright Scholar</h2>
+          <h2 className={`section-title ${styles.title}`}>निर्मला Bright Scholars</h2>
         </motion.div>
 
         {/* Program Description */}
@@ -186,14 +199,14 @@ export default function NirmalaBrightScholar() {
             animate={isTestimonialsInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <div className={styles.track} style={{ animationPlayState: isTestimonialsInView ? 'running' : 'paused' }}>
-              {[...testimonials, ...testimonials].map((t, i) => (
+            <div className={styles.track}>
+              {testimonials.map((t, i) => (
               <div key={i} className={styles.testimonialCard}>
                 <div className={styles.quoteIcon}>&ldquo;</div>
                 <p className={styles.quote}>{t.quote}</p>
                 <div className={styles.author}>
                   <div className={styles.authorAvatar} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #E8A87C, #d4845a)', color: '#1d1d1d', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.5px' }}>
-                    {t.initials}
+                    {t.gender === 'male' ? <MaleIcon /> : <FemaleIcon />}
                   </div>
                   <div>
                     <div className={styles.authorName}>{t.name}</div>
