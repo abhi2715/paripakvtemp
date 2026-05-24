@@ -189,7 +189,7 @@
 }
 
 .headerName {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-weight: 600;
   font-size: 0.95rem;
   color: #f9f4ef;
@@ -303,7 +303,7 @@
   border-radius: 18px;
   font-size: 0.88rem;
   line-height: 1.55;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter, 'Inter', sans-serif);
   word-wrap: break-word;
   position: relative;
 }
@@ -437,7 +437,7 @@
   background: rgba(232, 168, 124, 0.06);
   color: #E8A87C;
   font-size: 0.78rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter, 'Inter', sans-serif);
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, transform 0.2s;
@@ -480,7 +480,7 @@
   border: 1px solid rgba(232, 168, 124, 0.15);
   background: rgba(255, 255, 255, 0.04);
   color: #f0e6dc;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter, 'Inter', sans-serif);
   font-size: 0.88rem;
   outline: none;
   transition: border-color 0.25s, box-shadow 0.25s;
@@ -607,7 +607,7 @@
 }
 
 .welcomeTitle {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-weight: 600;
   font-size: 1.1rem;
   color: #f9f4ef;

@@ -38,7 +38,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #E8A87C, #d4845a);
   color: #1d1d1d;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-size: 1.8rem;
   font-weight: 700;
   display: flex;

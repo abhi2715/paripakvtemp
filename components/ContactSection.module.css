@@ -146,7 +146,7 @@
   border: 1px solid rgba(232, 168, 124, 0.25);
   border-radius: 8px;
   padding: 12px 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter, 'Inter', sans-serif);
   font-size: 0.93rem;
   color: #f0e6dc;
   outline: none;
@@ -185,7 +185,7 @@
   border: none;
   border-radius: 10px;
   padding: 15px 36px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter, 'Inter', sans-serif);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;

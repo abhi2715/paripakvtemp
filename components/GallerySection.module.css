@@ -51,7 +51,7 @@
 }
 
 .textWrap h3 {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-size: 2rem;
   font-weight: 700;
   color: #E8A87C;
@@ -137,7 +137,7 @@
 }
 
 .lightboxText h3 {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-size: 1.5rem;
   color: var(--peach);
   margin: 0;

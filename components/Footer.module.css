@@ -29,7 +29,7 @@
 }
 
 .name {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-size: 1.1rem;
   font-weight: 700;
   color: #E8A87C;

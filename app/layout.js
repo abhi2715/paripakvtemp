@@ -1,4 +1,10 @@
+import { Inter, Noto_Serif_Devanagari, Outfit, Playfair_Display } from 'next/font/google';
 import './globals.css';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const notoSerifDevanagari = Noto_Serif_Devanagari({ subsets: ['devanagari'], variable: '--font-noto-serif', display: 'swap' });
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', display: 'swap' });
 
 export const metadata = {
   title: 'Paripakv Foundation – Empowering Through Education',
@@ -9,11 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
+    <html lang="en" className={`${inter.variable} ${notoSerifDevanagari.variable} ${outfit.variable} ${playfair.variable}`}>
       <body>{children}</body>
     </html>
   );
