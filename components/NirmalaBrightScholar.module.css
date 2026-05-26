@@ -27,7 +27,7 @@
   font-size: 1rem;
   line-height: 1.8;
   color: #1d1d1d;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .programText strong {
@@ -61,7 +61,7 @@
   font-size: 0.9rem;
   line-height: 1.7;
   color: #1d1d1d;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .emailCta {
@@ -107,7 +107,7 @@
   font-size: 0.88rem;
   line-height: 1.65;
   color: #1d1d1d;
-  font-weight: 300;
+  font-weight: 500;
   padding-left: 20px;
   position: relative;
 }
@@ -137,17 +137,24 @@
 }
 
 .trackContainer {
-  overflow: hidden;
+  position: relative;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
 .track {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 24px;
-  padding: 16px 40px 32px;
-  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 16px 10px 32px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.track::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .testimonialCard {
@@ -181,7 +188,7 @@
   font-size: 0.9rem;
   line-height: 1.75;
   color: rgba(240, 230, 220, 0.8);
-  font-weight: 300;
+  font-weight: 500;
   flex: 1;
 }
 
@@ -231,6 +238,38 @@
   letter-spacing: 1px;
   margin-top: 16px;
   padding: 0 40px;
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: #1d1d1d;
+  border: 1px solid rgba(232, 168, 124, 0.3);
+  border-radius: 50%;
+  color: #E8A87C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.navBtn:hover {
+  background: #2a2a2a;
+  border-color: #E8A87C;
+}
+
+.navBtnLeft {
+  left: -5px;
+}
+
+.navBtnRight {
+  right: -5px;
 }
 
 @media (max-width: 768px) {

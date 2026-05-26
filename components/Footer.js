@@ -36,7 +36,7 @@ export default function Footer() {
           <a
             href="https://www.linkedin.com/in/paripakv-foundation-753653410/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className={styles.ghLink}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">

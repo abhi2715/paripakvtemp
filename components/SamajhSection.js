@@ -1,6 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 import ParallaxBackground from './ParallaxBackground';
 import styles from './SamajhSection.module.css';
 
@@ -70,7 +71,9 @@ export default function SamajhSection() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: 0.1, duration: 0.6, ease: 'easeOut' }}
             >
-              <img src="/images/Hero section images/image 5.png" alt="Samajh" className={styles.dummyImage} />
+              <div className={styles.dummyImage} style={{ position: 'relative', width: '100%', height: '400px' }}>
+                <Image src="/images/Hero section images/image 5.png" alt="Samajh" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', borderRadius: '16px' }} />
+              </div>
             </motion.div>
             <motion.div
               className={styles.description}
@@ -83,7 +86,7 @@ export default function SamajhSection() {
                 Samajh is an endeavour to augment the quality and capacity of local educational initiatives
                 by providing dedicated teachers with quality training and mentoring in core subjects. Operating
                 in a partnership model with schools at the middle school level, Samajh bridges the gap between
-                traditional rote learning and conceptual understanding.
+                traditional rote learning and conceptual understanding. <a href="#contact" style={{ color: '#E8A87C', textDecoration: 'underline' }}>Partner with us</a>
               </motion.p>
               <motion.p variants={itemVariants}>
                 Our teachers are young adults who are passionate and willing to be molded into exceptional

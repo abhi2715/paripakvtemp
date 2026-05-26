@@ -48,7 +48,7 @@
   font-size: 1rem;
   line-height: 1.8;
   color: #1d1d1d;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .featureGrid {
@@ -85,7 +85,7 @@
   font-size: 0.85rem;
   line-height: 1.65;
   color: rgba(240, 230, 220, 0.7);
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .emailCta {

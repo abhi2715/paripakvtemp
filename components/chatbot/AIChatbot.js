@@ -12,7 +12,7 @@
  * - Typing indicator
  * - Mobile-responsive (full-screen on mobile)
  * 
- * The AI persona is "Asha" — a warm, empathetic NGO relationship manager.
+ * The AI persona is "Avya" — a warm, empathetic NGO relationship manager.
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -124,6 +124,34 @@ function TypingIndicator() {
       </div>
     </div>
   );
+}
+
+
+// ─── Markdown Link Parser ───────────────────────────────────────────────────────
+function renderMessage(text, styles) {
+  if (!text) return null;
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push(
+      <a key={match.index} href={match[2]} className={styles.inlineActionBtn} target={match[2].startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer">
+        {match[1]}
+      </a>
+    );
+    lastIndex = regex.lastIndex;
+  }
+  
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+  
+  return parts.length > 0 ? parts : text;
 }
 
 
@@ -351,7 +379,7 @@ export default function AIChatbot() {
                 <div className={styles.onlineDot} />
               </div>
               <div className={styles.headerInfo}>
-                <div className={styles.headerName}>Asha</div>
+                <div className={styles.headerName}>Avya</div>
                 <div className={styles.headerStatus}>Paripakv Foundation Assistant</div>
               </div>
               <div className={styles.headerActions}>
@@ -378,7 +406,7 @@ export default function AIChatbot() {
               {messages.length === 0 && (
                 <div className={styles.welcomeWrap}>
                   <div className={styles.welcomeEmoji}>🙏</div>
-                  <div className={styles.welcomeTitle}>Hi, I&apos;m Asha!</div>
+                  <div className={styles.welcomeTitle}>Hi, I&apos;m Avya!</div>
                   <div className={styles.welcomeSubtitle}>
                     Your friendly guide at Paripakv Foundation. Ask me about our programmes, how to donate, volunteer, or anything else!
                   </div>
@@ -401,7 +429,7 @@ export default function AIChatbot() {
                   <div className={`${styles.bubble} ${
                     msg.role === 'user' ? styles.bubbleUser : styles.bubbleBot
                   }`}>
-                    {msg.text}
+                    {renderMessage(msg.text, styles)}
                     {/* Speaker button for bot messages */}
                     {msg.role === 'bot' && voiceSupported && (
                       <button
@@ -514,12 +542,15 @@ export default function AIChatbot() {
       </a>
 
       {/* ── Chat FAB Button ── */}
+      {!isOpen && (
+        <div className={styles.fabLabel}>Ask Avya ✨</div>
+      )}
       <motion.button
         className={`${styles.fab} ${isOpen ? styles.fabOpen : ''}`}
         onClick={toggleChat}
         whileTap={{ scale: 0.92 }}
-        title={isOpen ? 'Close chat' : 'Chat with Asha'}
-        aria-label={isOpen ? 'Close chat' : 'Chat with Asha - Paripakv Foundation AI Assistant'}
+        title={isOpen ? 'Close chat' : 'Chat with Avya'}
+        aria-label={isOpen ? 'Close chat' : 'Chat with Avya - Paripakv Foundation AI Assistant'}
         id="chatbot-fab"
       >
         {isOpen ? <CloseIcon /> : <ChatIcon />}

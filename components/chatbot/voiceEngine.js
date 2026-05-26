@@ -160,7 +160,7 @@ function getBestVoice() {
 
   // Priority order for voice selection
   const preferences = [
-    // Indian English female voices (best match for Asha persona)
+    // Indian English female voices (best match for Avya persona)
     v => v.lang === 'en-IN' && v.name.toLowerCase().includes('female'),
     v => v.lang === 'en-IN',
     // Any English female voice

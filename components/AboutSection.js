@@ -47,7 +47,7 @@ export default function AboutSection() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <div className={styles.dummyImageWrap}>
-              <Image src="/images/about-bg.png" alt="About Paripakv" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', borderRadius: '16px' }} />
+              <Image src="/images/Hero section images/image 3.png" alt="About Paripakv" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', borderRadius: '16px' }} />
             </div>
           </motion.div>
           <motion.div
@@ -59,10 +59,10 @@ export default function AboutSection() {
           >
             <motion.p variants={itemVariants}>
               Paripakv Foundation is a <strong>Section 8 company</strong> set up with the exclusive objective
-              of providing quality education to underprivileged students via various targeted intervention programs.
+              of providing quality education to underprivileged students via various targeted intervention <a href="#programmes" style={{ color: '#5a2d0c', textDecoration: 'underline', fontWeight: 'bold' }}>programs</a>.
             </motion.p>
             <motion.p variants={itemVariants}>
-              Using its own custom-built programs, it partners with other agencies in the field of education to
+              Using its own <a href="#programmes" style={{ color: '#5a2d0c', textDecoration: 'underline', fontWeight: 'bold' }}>custom-built programs</a>, it partners with other agencies in the field of education to
               transform the quality of education being provided to students, empowering them to realise their
               true potential in life.
             </motion.p>

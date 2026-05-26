@@ -3,14 +3,14 @@
  * 
  * Handles communication with AI APIs (Gemini primary, Groq fallback),
  * prompt engineering, conversation context management, and response formatting.
- * The AI persona is "Asha" — a warm, empathetic NGO relationship manager.
+ * The AI persona is "Avya" — a warm, empathetic NGO relationship manager.
  */
 
 import { getContextForQuery, getKnowledgeSummary } from './knowledgeBase';
 
 // ─── System Prompt ───────────────────────────────────────────────────────────────
 // This prompt shapes the AI's personality and behavior.
-const SYSTEM_PROMPT = `You are Asha, the virtual assistant for Paripakv Foundation — an Indian NGO (Section 8 company) dedicated to empowering underprivileged students through quality education.
+const SYSTEM_PROMPT = `You are Avya, the virtual assistant for Paripakv Foundation — an Indian NGO (Section 8 company) dedicated to empowering underprivileged students through quality education.
 
 PERSONALITY & TONE:
 - You are warm, empathetic, genuinely caring, and professionally friendly
@@ -43,11 +43,16 @@ RESPONSE GUIDELINES:
 - End responses with a gentle call-to-action or follow-up question when it feels natural
 - NEVER make up information not in your knowledge base
 - NEVER discuss topics unrelated to education, NGO work, or Paripakv Foundation
-- If asked about unrelated topics, gently redirect: "I'm Asha from Paripakv Foundation — I'm best at helping with our education programmes, donations, volunteering, and more! What would you like to know?"
+- If asked about unrelated topics, gently redirect: "I'm Avya from Paripakv Foundation — I'm best at helping with our education programmes, donations, volunteering, and more! What would you like to know?"
 
 FORMATTING:
-- Do NOT use markdown formatting (no **, ##, etc.) — your responses are displayed in a chat bubble
-- Use plain text only
+- For plain text, do NOT use markdown formatting (no **, ##, etc.).
+- When discussing specific topics, you MUST include a markdown button linking to the relevant section on the page. Use these exact links:
+  - Samajh Programme: [Learn About Samajh](#samajh)
+  - Nirmala Bright Scholar: [Nirmala Bright Scholar](#nirmala)
+  - Donate or Volunteer: [Get Involved](#get-involved)
+  - Contacting us: [Contact Us](#contact)
+  - Blogs or Insights: [Read Our Blogs](#blogs)
 - Use line breaks for readability when listing multiple points
 - Keep emoji usage minimal and natural (one per message max)`;
 
@@ -86,131 +91,35 @@ export function getHistory() {
 }
 
 
-// ─── AI API Calls ────────────────────────────────────────────────────────────────
+// ─── AI API Call (via server-side proxy) ─────────────────────────────────────────
 
 /**
- * Calls Google Gemini API (primary provider).
- * Uses gemini-2.0-flash for fast, high-quality responses on the free tier.
+ * Calls the server-side /api/chat route which securely proxies to Gemini/Groq.
+ * API keys never leave the server.
  */
-async function callGemini(userMessage, context) {
-  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-  if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-    throw new Error('Gemini API key not configured');
-  }
-
-  // Build the conversation contents for Gemini format
-  const contents = [];
-  
-  // Add conversation history
-  for (const msg of conversationHistory) {
-    contents.push({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: msg.content }]
-    });
-  }
-
-  // Add current message with context
-  const augmentedMessage = `[CONTEXT FROM KNOWLEDGE BASE]\n${context}\n\n[USER'S QUESTION]\n${userMessage}`;
-  contents.push({
-    role: 'user',
-    parts: [{ text: augmentedMessage }]
-  });
-
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: SYSTEM_PROMPT }]
-        },
-        contents,
-        generationConfig: {
-          temperature: 0.7,      // Warm but not too creative
-          topP: 0.9,
-          topK: 40,
-          maxOutputTokens: 500,  // Keep responses concise
-        },
-        safetySettings: [
-          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
-        ]
-      })
-    }
-  );
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(`Gemini API error ${response.status}: ${errorData?.error?.message || 'Unknown error'}`);
-  }
-
-  const data = await response.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  
-  if (!text) {
-    throw new Error('Empty response from Gemini');
-  }
-
-  return text.trim();
-}
-
-/**
- * Calls Groq API (fallback provider).
- * Uses llama-3.3-70b-versatile for high-quality fallback responses.
- */
-async function callGroq(userMessage, context) {
-  const apiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY;
-  if (!apiKey || apiKey === 'your_groq_api_key_here') {
-    throw new Error('Groq API key not configured');
-  }
-
-  // Build messages in OpenAI-compatible format
-  const messages = [
-    { role: 'system', content: SYSTEM_PROMPT }
-  ];
-
-  // Add conversation history
-  for (const msg of conversationHistory) {
-    messages.push({ role: msg.role, content: msg.content });
-  }
-
-  // Add current message with context
-  messages.push({
-    role: 'user',
-    content: `[CONTEXT FROM KNOWLEDGE BASE]\n${context}\n\n[USER'S QUESTION]\n${userMessage}`
-  });
-
-  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+async function callAI(userMessage, context) {
+  const response = await fetch('/api/chat', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
-      messages,
-      temperature: 0.7,
-      max_tokens: 500,
-      top_p: 0.9,
+      messages: conversationHistory,
+      systemPrompt: SYSTEM_PROMPT,
+      context,
+      userMessage,
     })
   });
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(`Groq API error ${response.status}: ${errorData?.error?.message || 'Unknown error'}`);
+    throw new Error(errorData?.error || `API error ${response.status}`);
   }
 
   const data = await response.json();
-  const text = data?.choices?.[0]?.message?.content;
-
-  if (!text) {
-    throw new Error('Empty response from Groq');
+  if (!data?.text) {
+    throw new Error('Empty response from AI');
   }
 
-  return text.trim();
+  return data.text;
 }
 
 
@@ -218,35 +127,33 @@ async function callGroq(userMessage, context) {
 
 /**
  * Processes a user message and returns an AI response.
- * Tries Gemini first, falls back to Groq, then to a static fallback.
+ * Tries the server-side AI proxy, then falls back to static responses.
  * 
  * @param {string} userMessage - The user's message
- * @returns {Promise<{text: string, sources: Array}>} - AI response with source references
+ * @returns {Promise<{text: string, provider: string}>} - AI response
  */
 export async function chat(userMessage) {
   // 1. Retrieve relevant knowledge base context
   const context = getContextForQuery(userMessage);
 
-  // 2. Try AI providers in order
+  // 2. Try AI via server-side proxy
   let responseText;
   let provider = 'none';
 
   try {
-    responseText = await callGemini(userMessage, context);
-    provider = 'gemini';
-  } catch (geminiError) {
-    console.warn('Gemini failed, trying Groq:', geminiError.message);
+    responseText = await callAI(userMessage, context);
+    provider = 'server';
+  } catch (error) {
+    console.warn('AI proxy failed, using fallback:', error.message);
     
-    try {
-      responseText = await callGroq(userMessage, context);
-      provider = 'groq';
-    } catch (groqError) {
-      console.warn('Groq also failed:', groqError.message);
-      
-      // 3. Static fallback — no API available
-      responseText = getStaticFallback(userMessage);
-      provider = 'fallback';
-    }
+    // 3. Static fallback — no API available
+    responseText = getStaticFallback(userMessage);
+    provider = 'fallback';
+  }
+  
+  // Ensure the Contact Us button is appended to EVERY response
+  if (!responseText.includes('[Contact Us](#contact)')) {
+    responseText += '\n\n[Contact Us](#contact)';
   }
 
   // 4. Save to conversation history

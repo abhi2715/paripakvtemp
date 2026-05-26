@@ -121,6 +121,45 @@
   50% { opacity: 1; transform: scale(1.05); }
 }
 
+/* ─── Floating "Ask Avya" Label ────────────────────────────────────────────── */
+
+.fabLabel {
+  position: fixed;
+  bottom: 46px;
+  right: 102px;
+  background: linear-gradient(135deg, #E8A87C 0%, #d4845a 100%);
+  color: #1d1d1d;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(232, 168, 124, 0.4);
+  animation: labelFloat 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 9998;
+  letter-spacing: 0.3px;
+}
+
+.fabLabel::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid #d4845a;
+}
+
+@keyframes labelFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 /* ─── Chat Panel ───────────────────────────────────────────────────────────── */
 
 .chatPanel {
@@ -192,7 +231,7 @@
   font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-weight: 600;
   font-size: 0.95rem;
-  color: #f9f4ef;
+  color: var(--white);
 }
 
 .headerStatus {
@@ -299,6 +338,7 @@
 }
 
 .bubble {
+  white-space: pre-wrap;
   padding: 10px 14px;
   border-radius: 18px;
   font-size: 0.88rem;
@@ -610,7 +650,7 @@
   font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-weight: 600;
   font-size: 1.1rem;
-  color: #f9f4ef;
+  color: var(--white);
   margin-bottom: 6px;
 }
 
@@ -660,6 +700,13 @@
     height: 56px;
   }
 
+  .fabLabel {
+    bottom: 34px;
+    right: 86px;
+    font-size: 0.78rem;
+    padding: 6px 13px;
+  }
+
   .chatPanel {
     position: fixed;
     bottom: 0;
@@ -695,4 +742,33 @@
     bottom: 100px;
     right: 20px;
   }
+}
+
+/* ─── Inline Action Button (Markdown Links) ────────────────────────────── */
+
+.inlineActionBtn {
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: 2px;
+  padding: 8px 14px;
+  background: rgba(232, 168, 124, 0.15);
+  border: 1px solid rgba(232, 168, 124, 0.35);
+  border-radius: 8px;
+  color: #E8A87C;
+  text-decoration: none;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.inlineActionBtn:hover {
+  background: rgba(232, 168, 124, 0.25);
+  border-color: rgba(232, 168, 124, 0.5);
+  transform: translateY(-1px);
+}
+
+.inlineActionBtn:active {
+  transform: translateY(0) scale(0.98);
 }

@@ -1,0 +1,142 @@
+.section {
+  position: relative;
+  background-color: var(--dark-bg);
+  padding: 100px 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.watercolorBg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  /* Multiple overlapping gradients to create an irregular, cloudy watercolor edge */
+  background: 
+    radial-gradient(ellipse at 40% 40%, rgba(232,168,124,0.15) 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 60%, rgba(232,168,124,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 30%, rgba(232,168,124,0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 25% 70%, rgba(232,168,124,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(232,168,124,0.12) 0%, transparent 60%);
+  filter: blur(25px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.title {
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.text {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.text strong {
+  font-weight: 700;
+  color: var(--peach);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 70px 0;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+  .text {
+    font-size: 1.15rem;
+  }
+}
+
+/* Hexagon Grid */
+.hexGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.hexWrapper {
+  width: 150px;
+  height: 173px; /* width * 1.1547 for perfect hexagon */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hexagon {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(232, 168, 124, 0.08);
+  border: 1px solid rgba(232, 168, 124, 0.2);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: all 0.3s ease;
+}
+
+.hexWrapper:hover .hexagon {
+  background: rgba(232, 168, 124, 0.15);
+  transform: scale(1.05);
+}
+
+.hexContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.hexIcon {
+  color: #E8A87C;
+  margin-bottom: 10px;
+}
+
+.hexDivider {
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #E8A87C, transparent);
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.hexTitle {
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.hexNumber {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #E8A87C;
+}

@@ -11,8 +11,8 @@
   --dark-mid: #1a1a1a;
   --dark-card: #151515;
   --dark-light: #242424;
-  --white: #f9f4ef;
-  --cream: #faf5ef;
+  --white: rgba(240, 230, 220, 0.85);
+  --cream: rgba(240, 230, 220, 0.85);
   --text-light: #f0e6dc;
   --text-muted: rgba(240, 230, 220, 0.6);
   --accent-warm: #c77d4a;

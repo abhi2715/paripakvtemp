@@ -20,31 +20,31 @@ export default function Navbar() {
   const [activeLink, setActiveLink] = useState('');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
 
-    // Active link highlighting
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveLink(`#${entry.target.id}`);
+      const sections = navLinks.map(link => document.querySelector(link.href)).filter(Boolean);
+      let currentActive = '';
+
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        // The last section whose top is above the middle of the viewport becomes active
+        if (rect.top <= window.innerHeight / 2) {
+          currentActive = `#${sec.id}`;
         }
       });
+
+      if (currentActive) {
+        setActiveLink(currentActive);
+      }
     };
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -70% 0px', // Trigger when section is in top half
-      threshold: 0,
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const sections = navLinks.map((link) => document.querySelector(link.href)).filter(Boolean);
-    sections.forEach((sec) => observer.observe(sec));
+    window.addEventListener('scroll', handleScroll);
+    // Trigger once on mount
+    handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      sections.forEach((sec) => observer.unobserve(sec));
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

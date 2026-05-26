@@ -2,6 +2,7 @@ import { blogsData } from '../../../lib/blogsData';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import Image from 'next/image';
+import DOMPurify from 'isomorphic-dompurify';
 
 // Tell Next.js which paths to pre-render at build time
 export function generateStaticParams() {
@@ -23,7 +24,40 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPostPage({ params }) {
   const resolvedParams = await params;
-  const blog = blogsData.find((b) => b.slug === resolvedParams.slug);
+  let blog = blogsData.find((b) => b.slug === resolvedParams.slug);
+
+  if (process.env.NODE_ENV === 'development') {
+    try {
+      // Try to fetch from local API
+      const res = await fetch('http://localhost:8080/api/blogs', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        const apiBlog = data.find((b) => b.id === resolvedParams.slug);
+        if (apiBlog) {
+          blog = {
+            slug: apiBlog.id,
+            image: apiBlog.coverImage || '/images/Hero section images/image 2.png',
+            date: new Date(apiBlog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            title: apiBlog.title,
+            excerpt: apiBlog.content
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/&nbsp;/g, ' ')
+              .replace(/&amp;/g, '&')
+              .replace(/&lt;/g, '<')
+              .replace(/&gt;/g, '>')
+              .replace(/&quot;/g, '"')
+              .replace(/&#39;/g, "'")
+              .replace(/\s+/g, ' ')
+              .trim()
+              .substring(0, 150) + '...',
+            content: apiBlog.content
+          };
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to fetch local blog, falling back to static data');
+    }
+  }
 
   if (!blog) {
     return (
@@ -41,8 +75,8 @@ export default async function BlogPostPage({ params }) {
   return (
     <>
       <Navbar />
-      <main style={{ background: '#f9f4ef', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
-        <article className="max-width" style={{ maxWidth: '800px', margin: '0 auto', background: '#fff', padding: '40px', borderRadius: '20px', boxShadow: '0 10px 40px rgba(0,0,0,0.05)', position: 'relative' }}>
+      <main style={{ background: 'var(--dark)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <article className="max-width" style={{ maxWidth: '800px', margin: '0 auto', background: 'var(--dark-card)', padding: '40px', borderRadius: '20px', boxShadow: '0 10px 40px rgba(0,0,0,0.5)', position: 'relative' }}>
           
           <div style={{ marginBottom: '30px' }}>
              <a href="/#blogs" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#d4845a', fontWeight: '600', textDecoration: 'none', transition: 'opacity 0.2s' }}>
@@ -58,7 +92,7 @@ export default async function BlogPostPage({ params }) {
             <div style={{ color: '#d4845a', fontWeight: '600', marginBottom: '15px' }}>
               {blog.date}
             </div>
-            <h1 style={{ fontSize: '2.5rem', color: '#1d1d1d', lineHeight: '1.3', marginBottom: '30px' }}>
+            <h1 style={{ fontSize: '2.5rem', color: 'var(--white)', lineHeight: '1.3', marginBottom: '30px' }}>
               {blog.title}
             </h1>
             
@@ -77,12 +111,31 @@ export default async function BlogPostPage({ params }) {
           </header>
 
           <div 
-            style={{ fontSize: '1.15rem', lineHeight: '1.8', color: '#333' }}
-            dangerouslySetInnerHTML={{ __html: blog.content }} 
+            style={{ 
+              fontSize: '1.15rem', 
+              lineHeight: '1.8', 
+              color: 'var(--text-muted)',
+              wordWrap: 'break-word',
+              overflowWrap: 'break-word',
+              wordBreak: 'break-word'
+            }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }} 
+            className="blog-rich-content"
           />
 
-          <div style={{ marginTop: '60px', paddingTop: '30px', borderTop: '1px solid #eee', textAlign: 'center' }}>
-             <a href="/#contact" style={{ display: 'inline-block', background: 'linear-gradient(135deg, #E8A87C, #d4845a)', color: '#fff', padding: '12px 30px', borderRadius: '30px', fontWeight: '600', textDecoration: 'none' }}>
+          <style dangerouslySetInnerHTML={{__html: `
+            .blog-rich-content img {
+              max-width: 100%;
+              height: auto;
+              border-radius: 8px;
+            }
+            .blog-rich-content p {
+              margin-bottom: 1.5em;
+            }
+          `}} />
+
+          <div style={{ marginTop: '60px', paddingTop: '30px', borderTop: '1px solid var(--dark-light)', textAlign: 'center' }}>
+             <a href="/#contact" style={{ display: 'inline-block', background: 'linear-gradient(135deg, #E8A87C, #d4845a)', color: 'var(--dark)', padding: '12px 30px', borderRadius: '30px', fontWeight: '600', textDecoration: 'none' }}>
                Join Us
              </a>
           </div>

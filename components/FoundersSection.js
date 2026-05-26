@@ -19,6 +19,8 @@ const founders = [
     name: 'Harmendra Gandhi',
     role: 'Co-Founder',
     initials: 'HG',
+    image: '/images/harmendra-gandhi.jpg',
+    imagePosition: 'top',
     bio: 'Harmendra Gandhi is an IIT Kanpur and IIM Bangalore graduate who has worked in areas of finance and portfolio management for the past 25 years. He has also been deeply involved in NGOs in the education sector, specially in fund raising and governance.',
   },
 ];

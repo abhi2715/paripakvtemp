@@ -14,7 +14,8 @@ const programs = [
     ),
     title: 'समझ',
     desc: 'Training and mentoring middle school teachers in core subjects to build a strong conceptual foundation for students.',
-    color: '#d4845a'
+    color: '#d4845a',
+    link: '#samajh'
   },
   {
     icon: (
@@ -24,7 +25,8 @@ const programs = [
     ),
     title: 'निर्मला BRIGHT SCHOLARS',
     desc: 'Mentorship and financial support for exceptionally bright underprivileged youth pursuing higher education.',
-    color: '#d4845a'
+    color: '#d4845a',
+    link: '#nirmala'
   }
 ];
 
@@ -33,7 +35,7 @@ export default function OurProgrammes() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="section" id="programmes" ref={ref} style={{ background: '#f9f4ef', position: 'relative', overflow: 'hidden' }}>
+    <section className="section" id="programmes" ref={ref} style={{ background: 'var(--dark-mid)', position: 'relative', overflow: 'hidden' }}>
       <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 8.png" opacity={0.07} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
@@ -42,7 +44,7 @@ export default function OurProgrammes() {
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <h2 className="section-title" style={{ color: '#1d1d1d', fontFamily: "'Outfit', sans-serif", fontWeight: 800, textTransform: 'uppercase' }}>Our Programmes</h2>
+          <h2 className="section-title" style={{ color: 'var(--white)', fontFamily: "'Outfit', sans-serif", fontWeight: 800, textTransform: 'uppercase' }}>Our Programmes</h2>
         </motion.div>
 
         <div className={styles.grid}>
@@ -64,6 +66,9 @@ export default function OurProgrammes() {
                   <span className={styles.underline} style={{ backgroundColor: prog.color }}></span>
                 </h3>
                 <p className={styles.desc}>{prog.desc}</p>
+                <a href={prog.link} className={styles.readMore}>
+                  Read More →
+                </a>
               </div>
             </TiltCard>
           ))}

@@ -10,7 +10,6 @@ const HINDI_SYLLABLES = ['प', 'रि', 'प', 'क्व'];
 export default function HeroSection() {
   const [phase, setPhase] = useState('intro'); // intro | collage
   const [lettersDone, setLettersDone] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
 
   // After letters animate in, wait then show collage
   useEffect(() => {

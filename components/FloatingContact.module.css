@@ -15,7 +15,7 @@
   border-radius: 50%;
   background: #E8A87C;
   color: #1d1d1d;
-  border: 3px solid #ffffff;
+  border: 3px solid var(--peach);
   cursor: pointer;
   display: flex;
   align-items: center;

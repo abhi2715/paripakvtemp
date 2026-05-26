@@ -8,7 +8,26 @@
 
 // ─── Knowledge Chunks ───────────────────────────────────────────────────────────
 // Each chunk represents a piece of website content the chatbot can reference.
-const KNOWLEDGE_BASE = [
+import { testimonialsData } from '../../lib/testimonialsData';
+import { blogsData } from '../../lib/blogsData';
+
+const dynamicTestimonials = testimonialsData.map((t, idx) => ({
+  id: `testimonial-${idx}`,
+  category: 'Success Stories',
+  title: `${t.role.includes('Parent') ? 'Parent' : 'Scholar'} Story: ${t.name}`,
+  content: `${t.name}, a ${t.role}, shares their experience: "${t.quote}"`,
+  keywords: [t.name.toLowerCase(), 'testimonial', 'story', 'scholar', 'success', 'impact', 'support', 'motivation', ...t.role.toLowerCase().split(' ')]
+}));
+
+const dynamicBlogs = blogsData.map((b) => ({
+  id: `blog-${b.slug}`,
+  category: 'Blogs',
+  title: b.title,
+  content: `Blog post titled "${b.title}": ${b.excerpt}`,
+  keywords: ['blog', 'insight', 'article', 'news', 'update', 'latest', 'story', ...b.title.toLowerCase().split(' ').filter(w => w.length > 3)]
+}));
+
+const STATIC_KNOWLEDGE_BASE = [
   // ── About ──
   {
     id: 'about-mission',
@@ -80,36 +99,6 @@ const KNOWLEDGE_BASE = [
     title: 'Nirmala Bright Scholar Benefits',
     content: `The Nirmala Bright Scholar programme provides: 1) Financial scholarship covering academic expenses including internet, books, stationery, and coaching fees. 2) One-on-one mentorship from professionals from IIM, IIT and top industry leaders. 3) Career counselling and life skills sessions every month with assigned mentor. 4) Aptitude-based selection ensuring maximum impact for every rupee donated.`,
     keywords: ['nirmala', 'benefits', 'scholarship', 'financial', 'mentorship', 'career', 'counselling', 'coaching', 'books', 'internet', 'fees', 'aptitude', 'selection', 'how does it work']
-  },
-
-  // ── Testimonials / Success Stories ──
-  {
-    id: 'testimonial-yashashwini',
-    category: 'Success Stories',
-    title: 'Scholar Story: Yashashwini',
-    content: `Yashashwini, a Commerce student and Nirmala Bright Scholar, says: "I am grateful to the Nirmala Bright Scholarship Program for supporting my education. This scholarship motivated me to study harder and move closer to my career goals. The financial assistance, guidance, and mentor support helped me grow not just academically but as a person."`,
-    keywords: ['yashashwini', 'testimonial', 'story', 'scholar', 'commerce', 'student', 'success', 'impact', 'grateful']
-  },
-  {
-    id: 'testimonial-shakthi',
-    category: 'Success Stories',
-    title: 'Scholar Story: Shakthi',
-    content: `Shakthi, a BBA student and Nirmala Bright Scholar, says: "During a difficult time financially and personally, the support and encouragement I received helped me continue my studies and believe in myself. The trainers and mentors were very supportive, motivating, and always ready to help us grow both personally and professionally. I am truly grateful for this opportunity and the positive impact it has made on my life."`,
-    keywords: ['shakthi', 'testimonial', 'story', 'scholar', 'bba', 'student', 'success', 'impact', 'support', 'motivation']
-  },
-  {
-    id: 'testimonial-umapathy',
-    category: 'Success Stories',
-    title: 'Parent Story: Umapathy R.',
-    content: `Umapathy R., a parent and educator, shares: "When I was struggling to pay the fees for my daughter, the Nirmala Bright Scholarship program joined hands with us. They gave my daughter a new life, instilled confidence in her, and showed us the right path forward on our journey. I will always be grateful for their kindness."`,
-    keywords: ['umapathy', 'parent', 'testimonial', 'story', 'fees', 'daughter', 'confidence', 'gratitude', 'family']
-  },
-  {
-    id: 'testimonial-megha',
-    category: 'Success Stories',
-    title: 'Scholar Story: Megha',
-    content: `Megha, an Engineering student and Nirmala Bright Scholar, says: "This scholarship gave me the support and financial assistance I needed to shape my goals and build a strong foundation for my career in engineering. It helped me focus on my studies without worrying about finances, and I am thankful for every opportunity it opened up."`,
-    keywords: ['megha', 'testimonial', 'story', 'scholar', 'engineering', 'student', 'success', 'financial', 'career']
   },
 
   // ── Get Involved ──
@@ -188,15 +177,6 @@ const KNOWLEDGE_BASE = [
     keywords: ['impact', 'results', 'success', 'stories', 'achievements', 'difference', 'how many', 'students helped']
   },
 
-  // ── Blogs / Insights ──
-  {
-    id: 'blogs-overview',
-    category: 'Blogs',
-    title: 'Latest Insights & Blog Posts',
-    content: `Paripakv Foundation shares insights through their blog section called "Latest Insights". Recent topics include: "The Future of Digital Classrooms in Rural Areas" — exploring how technology bridges the education gap; "Stories from the Streets: Empowering the Unheard" — on-ground initiatives with children; "Healthcare Initiatives Making a Difference" — mobile clinics for vulnerable communities; and "Skill Development: A Pathway to Livelihood" — training programs for youth.`,
-    keywords: ['blog', 'blogs', 'insights', 'articles', 'news', 'updates', 'latest', 'stories', 'read']
-  },
-
   // ── Gallery ──
   {
     id: 'gallery-overview',
@@ -206,6 +186,8 @@ const KNOWLEDGE_BASE = [
     keywords: ['gallery', 'photos', 'images', 'pictures', 'impact', 'action', 'visual', 'see', 'show']
   }
 ];
+
+const KNOWLEDGE_BASE = [...STATIC_KNOWLEDGE_BASE, ...dynamicTestimonials, ...dynamicBlogs];
 
 
 // ─── TF-IDF Search Engine ────────────────────────────────────────────────────────

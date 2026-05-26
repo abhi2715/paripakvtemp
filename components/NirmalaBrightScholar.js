@@ -17,43 +17,21 @@ const FemaleIcon = () => (
   </svg>
 );
 
-const testimonials = [
-  {
-    name: 'Student',
-    role: 'Commerce Student',
-    gender: 'female',
-    quote:
-      'I am grateful to the Nirmala Bright Scholarship Program for supporting my education. This scholarship motivated me to study harder and move closer to my career goals. The financial assistance, guidance, and mentor support helped me grow not just academically but as a person.',
-  },
-  {
-    name: 'Student',
-    role: 'BBA Student',
-    gender: 'female',
-    quote:
-      'During a difficult time financially and personally, the support and encouragement I received helped me continue my studies and believe in myself. The trainers and mentors were very supportive, motivating, and always ready to help us grow both personally and professionally. I am truly grateful for this opportunity and the positive impact it has made on my life.',
-  },
-  {
-    name: 'Parent',
-    role: 'Parent & Educator',
-    gender: 'male',
-    quote:
-      'When I was struggling to pay the fees for my daughter, the Nirmala Bright Scholarship program joined hands with us. They gave my daughter a new life, instilled confidence in her, and showed us the right path forward on our journey. I will always be grateful for their kindness.',
-  },
-  {
-    name: 'Student',
-    role: 'Engineering Student',
-    gender: 'female',
-    quote:
-      'This scholarship gave me the support and financial assistance I needed to shape my goals and build a strong foundation for my career in engineering. It helped me focus on my studies without worrying about finances, and I am thankful for every opportunity it opened up.',
-  },
-];
+import { testimonialsData as testimonials } from '../lib/testimonialsData';
 
 export default function NirmalaBrightScholar() {
   const ref = useRef(null);
   const trackRef = useRef(null);
+  const scrollRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const isTestimonialsInView = useInView(trackRef, { once: true, margin: '-80px' });
-  const [isDragging, setIsDragging] = useState(false);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = 350; // card width + gap
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -93,7 +71,7 @@ export default function NirmalaBrightScholar() {
             <motion.p variants={itemVariants}>
               The objective of this program is to provide <strong>financial assistance &amp; education support services</strong> to
               students who have financial constraints and yet have a clear demonstration of ambition, goal and
-              capability towards building a career for themselves.
+              capability towards building a career for themselves. <a href="#contact" style={{ color: '#E8A87C', textDecoration: 'underline' }}>Apply Now</a>
             </motion.p>
             <motion.p variants={itemVariants}>
               It is a <strong>dual program</strong> which combines financial assistance with{' '}
@@ -199,7 +177,10 @@ export default function NirmalaBrightScholar() {
             animate={isTestimonialsInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <div className={styles.track}>
+            <button className={`${styles.navBtn} ${styles.navBtnLeft}`} onClick={() => scroll('left')} aria-label="Previous testimonials">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div className={styles.track} ref={scrollRef}>
               {testimonials.map((t, i) => (
               <div key={i} className={styles.testimonialCard}>
                 <div className={styles.quoteIcon}>&ldquo;</div>
@@ -216,6 +197,9 @@ export default function NirmalaBrightScholar() {
               </div>
             ))}
             </div>
+            <button className={`${styles.navBtn} ${styles.navBtnRight}`} onClick={() => scroll('right')} aria-label="Next testimonials">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
           </motion.div>
         </div>
       </section>
