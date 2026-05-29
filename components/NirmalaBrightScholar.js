@@ -27,14 +27,12 @@ export default function NirmalaBrightScholar() {
   const [testimonials, setTestimonials] = useState(fallbackTestimonials);
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_ADMIN_API_URL;
-    if (!apiUrl) return;
-
-    fetch(`${apiUrl}/api/public/testimonials`)
+    fetch('https://paripakv-admin.vercel.app/api/public/testimonials')
       .then(r => r.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
-          setTestimonials(data);
+          // Merge: API testimonials first, then hardcoded ones
+          setTestimonials([...data, ...fallbackTestimonials]);
         }
       })
       .catch(() => { /* keep fallback data */ });
