@@ -27,15 +27,16 @@ export default function NirmalaBrightScholar() {
   const [testimonials, setTestimonials] = useState(fallbackTestimonials);
 
   useEffect(() => {
-    fetch('https://paripakv-admin.vercel.app/api/public/testimonials')
+    fetch('https://paripakv-admin.vercel.app/api/public/testimonials', { cache: 'no-store' })
       .then(r => r.json())
       .then(data => {
+        console.log("Fetched testimonials:", data);
         if (Array.isArray(data) && data.length > 0) {
           // Merge: API testimonials first, then hardcoded ones
           setTestimonials([...data, ...fallbackTestimonials]);
         }
       })
-      .catch(() => { /* keep fallback data */ });
+      .catch((e) => { console.error("Testimonial fetch error:", e); });
   }, []);
 
   const scroll = (direction) => {

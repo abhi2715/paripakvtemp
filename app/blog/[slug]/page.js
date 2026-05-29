@@ -28,15 +28,14 @@ export default async function BlogPostPage({ params }) {
 
   try {
     // Fetch from live admin API
-    const res = await fetch('https://paripakv-admin.vercel.app/api/public/blogs', { cache: 'no-store' });
+    const res = await fetch(`https://paripakv-admin.vercel.app/api/public/blogs/${resolvedParams.slug}`, { cache: 'no-store' });
     if (res.ok) {
-      const data = await res.json();
-      const apiBlog = data.find((b) => (b.slug || b._id) === resolvedParams.slug);
-      if (apiBlog) {
+      const apiBlog = await res.json();
+      if (apiBlog && (apiBlog.slug === resolvedParams.slug || apiBlog._id === resolvedParams.slug)) {
         blog = {
           slug: apiBlog.slug || apiBlog._id,
           image: apiBlog.coverImage || '/images/Hero section images/image 2.png',
-          date: new Date(apiBlog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          date: apiBlog.createdAt ? new Date(apiBlog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown Date',
           title: apiBlog.title,
           excerpt: apiBlog.excerpt || (apiBlog.content
             ? apiBlog.content
@@ -90,7 +89,7 @@ export default async function BlogPostPage({ params }) {
 
           <header style={{ marginBottom: '40px', textAlign: 'center' }}>
             <div style={{ color: '#d4845a', fontWeight: '600', marginBottom: '15px' }}>
-              {blog.date}
+              {blog.date !== 'Invalid Date' ? blog.date : ''}
             </div>
             <h1 style={{ fontSize: '2.5rem', color: 'var(--white)', lineHeight: '1.3', marginBottom: '30px' }}>
               {blog.title}
@@ -110,18 +109,24 @@ export default async function BlogPostPage({ params }) {
             )}
           </header>
 
-          <div 
-            style={{ 
-              fontSize: '1.15rem', 
-              lineHeight: '1.8', 
-              color: 'var(--text-muted)',
-              wordWrap: 'break-word',
-              overflowWrap: 'break-word',
-              wordBreak: 'break-word'
-            }}
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }} 
-            className="blog-rich-content"
-          />
+          {blog.content ? (
+            <div 
+              style={{ 
+                fontSize: '1.15rem', 
+                lineHeight: '1.8', 
+                color: 'var(--text-muted)',
+                wordWrap: 'break-word',
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word'
+              }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }} 
+              className="blog-rich-content"
+            />
+          ) : (
+            <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-muted)' }}>
+              No content available.
+            </div>
+          )}
 
           <style dangerouslySetInnerHTML={{__html: `
             .blog-rich-content img {

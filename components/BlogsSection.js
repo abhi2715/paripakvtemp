@@ -16,7 +16,7 @@ export default function BlogsSection() {
   const [blogsToDisplay, setBlogsToDisplay] = useState(blogsData);
 
   useEffect(() => {
-    fetch('https://paripakv-admin.vercel.app/api/public/blogs')
+    fetch('https://paripakv-admin.vercel.app/api/public/blogs', { cache: 'no-store' })
       .then(res => {
         if (!res.ok) throw new Error('API failed');
         return res.json();
