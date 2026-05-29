@@ -1,8 +1,9 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import ParallaxBackground from './ParallaxBackground';
 import styles from './NirmalaBrightScholar.module.css';
+import { testimonialsData as fallbackTestimonials } from '../lib/testimonialsData';
 
 const MaleIcon = () => (
   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -17,14 +18,27 @@ const FemaleIcon = () => (
   </svg>
 );
 
-import { testimonialsData as testimonials } from '../lib/testimonialsData';
-
 export default function NirmalaBrightScholar() {
   const ref = useRef(null);
   const trackRef = useRef(null);
   const scrollRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const isTestimonialsInView = useInView(trackRef, { once: true, margin: '-80px' });
+  const [testimonials, setTestimonials] = useState(fallbackTestimonials);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_ADMIN_API_URL;
+    if (!apiUrl) return;
+
+    fetch(`${apiUrl}/api/public/testimonials`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTestimonials(data);
+        }
+      })
+      .catch(() => { /* keep fallback data */ });
+  }, []);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
