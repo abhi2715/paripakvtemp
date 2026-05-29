@@ -26,37 +26,37 @@ export default async function BlogPostPage({ params }) {
   const resolvedParams = await params;
   let blog = blogsData.find((b) => b.slug === resolvedParams.slug);
 
-  if (process.env.NODE_ENV === 'development') {
-    try {
-      // Try to fetch from local API
-      const res = await fetch('http://localhost:8080/api/blogs', { cache: 'no-store' });
-      if (res.ok) {
-        const data = await res.json();
-        const apiBlog = data.find((b) => b.id === resolvedParams.slug);
-        if (apiBlog) {
-          blog = {
-            slug: apiBlog.id,
-            image: apiBlog.coverImage || '/images/Hero section images/image 2.png',
-            date: new Date(apiBlog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-            title: apiBlog.title,
-            excerpt: apiBlog.content
-              .replace(/<[^>]+>/g, ' ')
-              .replace(/&nbsp;/g, ' ')
-              .replace(/&amp;/g, '&')
-              .replace(/&lt;/g, '<')
-              .replace(/&gt;/g, '>')
-              .replace(/&quot;/g, '"')
-              .replace(/&#39;/g, "'")
-              .replace(/\s+/g, ' ')
-              .trim()
-              .substring(0, 150) + '...',
-            content: apiBlog.content
-          };
-        }
+  try {
+    // Fetch from live admin API
+    const res = await fetch('https://paripakv-admin.vercel.app/api/public/blogs', { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      const apiBlog = data.find((b) => (b.slug || b._id) === resolvedParams.slug);
+      if (apiBlog) {
+        blog = {
+          slug: apiBlog.slug || apiBlog._id,
+          image: apiBlog.coverImage || '/images/Hero section images/image 2.png',
+          date: new Date(apiBlog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          title: apiBlog.title,
+          excerpt: apiBlog.excerpt || (apiBlog.content
+            ? apiBlog.content
+                .replace(/<[^>]+>/g, ' ')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                .replace(/\s+/g, ' ')
+                .trim()
+                .substring(0, 150) + '...'
+            : 'No excerpt available'),
+          content: apiBlog.content
+        };
       }
-    } catch (err) {
-      console.warn('Failed to fetch local blog, falling back to static data');
     }
+  } catch (err) {
+    console.warn('Failed to fetch blog from admin API, falling back to static data');
   }
 
   if (!blog) {

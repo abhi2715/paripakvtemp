@@ -16,39 +16,40 @@ export default function BlogsSection() {
   const [blogsToDisplay, setBlogsToDisplay] = useState(blogsData);
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      fetch('http://localhost:8080/api/blogs')
-        .then(res => {
-          if (!res.ok) throw new Error('API failed');
-          return res.json();
-        })
-        .then(data => {
-          if (Array.isArray(data) && data.length > 0) {
-            const mappedBlogs = data.map((b) => ({
-              slug: b.id,
-              image: b.coverImage || '/images/Hero section images/image 2.png',
-              date: new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-              title: b.title,
-              excerpt: b.content
-                .replace(/<[^>]+>/g, ' ')
-                .replace(/&nbsp;/g, ' ')
-                .replace(/&amp;/g, '&')
-                .replace(/&lt;/g, '<')
-                .replace(/&gt;/g, '>')
-                .replace(/&quot;/g, '"')
-                .replace(/&#39;/g, "'")
-                .replace(/\s+/g, ' ')
-                .trim()
-                .substring(0, 150) + '...',
-              content: b.content
-            }));
-            setBlogsToDisplay(mappedBlogs);
-          }
-        })
-        .catch(err => {
-          console.warn('Failed to fetch local blogs, falling back to static data:', err);
-        });
-    }
+    fetch('https://paripakv-admin.vercel.app/api/public/blogs')
+      .then(res => {
+        if (!res.ok) throw new Error('API failed');
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          const mappedBlogs = data.map((b) => ({
+            slug: b.slug || b._id,
+            image: b.coverImage || '/images/Hero section images/image 2.png',
+            date: new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            title: b.title,
+            excerpt: b.excerpt || (b.content
+              ? b.content
+                  .replace(/<[^>]+>/g, ' ')
+                  .replace(/&nbsp;/g, ' ')
+                  .replace(/&amp;/g, '&')
+                  .replace(/&lt;/g, '<')
+                  .replace(/&gt;/g, '>')
+                  .replace(/&quot;/g, '"')
+                  .replace(/&#39;/g, "'")
+                  .replace(/\s+/g, ' ')
+                  .trim()
+                  .substring(0, 150) + '...'
+              : 'No excerpt available'),
+            content: b.content
+          }));
+          // Merge API blogs first, then hardcoded ones
+          setBlogsToDisplay([...mappedBlogs, ...blogsData]);
+        }
+      })
+      .catch(err => {
+        console.warn('Failed to fetch blogs from admin API, falling back to static data:', err);
+      });
   }, []);
 
   return (
