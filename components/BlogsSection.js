@@ -26,7 +26,7 @@ export default function BlogsSection() {
           const mappedBlogs = data.map((b) => ({
             slug: b.slug || b._id,
             image: b.coverImage || '/images/Hero section images/image 2.png',
-            date: new Date(b.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            date: b.publishedAt ? new Date(b.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown Date',
             title: b.title,
             excerpt: b.excerpt || (b.content
               ? b.content

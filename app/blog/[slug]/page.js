@@ -2,7 +2,6 @@ import { blogsData } from '../../../lib/blogsData';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import Image from 'next/image';
-import DOMPurify from 'isomorphic-dompurify';
 
 // Tell Next.js which paths to pre-render at build time
 export function generateStaticParams() {
@@ -119,7 +118,7 @@ export default async function BlogPostPage({ params }) {
                 overflowWrap: 'break-word',
                 wordBreak: 'break-word'
               }}
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }} 
+              dangerouslySetInnerHTML={{ __html: blog.content }} 
               className="blog-rich-content"
             />
           ) : (
