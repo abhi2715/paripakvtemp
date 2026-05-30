@@ -21,7 +21,7 @@ export default function VisionSection() {
         >
           <h2 className={styles.title}>Our Vision</h2>
           <p className={styles.text}>
-            Paripakv Foundation is committed to making <strong>schools</strong> and <strong>communities future-ready</strong> where every <strong>child and youth</strong> has the <strong>education, tools and opportunities</strong> to thrive in an ever-changing world.
+            Paripakv Foundation envisions a world where every young person, regardless of socioeconomic background, has access to the <strong>education, skills, mentorship, and opportunities</strong> needed to achieve their fullest potential. Aligned with the <strong>United Nations Sustainable Development Goals</strong>, we are committed to advancing inclusive and sustainable development through the transformative power of education, ensuring that no one is left behind.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '40px' }}>
             <SDGWheel size={120} />
