@@ -38,14 +38,14 @@ export default function SDGWheel({ size = 200 }) {
     const startAngle = i * segmentAngle - Math.PI / 2 + gap;
     const endAngle = (i + 1) * segmentAngle - Math.PI / 2 - gap;
 
-    const x1 = cx + outerR * Math.cos(startAngle);
-    const y1 = cy + outerR * Math.sin(startAngle);
-    const x2 = cx + outerR * Math.cos(endAngle);
-    const y2 = cy + outerR * Math.sin(endAngle);
-    const x3 = cx + innerR * Math.cos(endAngle);
-    const y3 = cy + innerR * Math.sin(endAngle);
-    const x4 = cx + innerR * Math.cos(startAngle);
-    const y4 = cy + innerR * Math.sin(startAngle);
+    const x1 = (cx + outerR * Math.cos(startAngle)).toFixed(4);
+    const y1 = (cy + outerR * Math.sin(startAngle)).toFixed(4);
+    const x2 = (cx + outerR * Math.cos(endAngle)).toFixed(4);
+    const y2 = (cy + outerR * Math.sin(endAngle)).toFixed(4);
+    const x3 = (cx + innerR * Math.cos(endAngle)).toFixed(4);
+    const y3 = (cy + innerR * Math.sin(endAngle)).toFixed(4);
+    const x4 = (cx + innerR * Math.cos(startAngle)).toFixed(4);
+    const y4 = (cy + innerR * Math.sin(startAngle)).toFixed(4);
 
     const path = [
       `M ${x1} ${y1}`,
