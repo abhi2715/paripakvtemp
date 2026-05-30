@@ -62,7 +62,7 @@ export default function SDGWheel({ size = 200 }) {
         fill={goal.color}
         stroke="none"
       >
-        <title>SDG {goal.num}: {goal.label}</title>
+        <title>{`SDG ${goal.num}: ${goal.label}`}</title>
       </path>
     );
   });
