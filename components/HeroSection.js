@@ -135,7 +135,7 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.a
-              href="#about"
+              href="#vision"
               className={styles.scrollIndicator}
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 1.6 }}
