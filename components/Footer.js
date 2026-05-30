@@ -48,11 +48,13 @@ export default function Footer() {
       </div>
 
       <div className={styles.bottom}>
-        <span>&copy; {new Date().getFullYear()} Paripakv Foundation. All rights reserved.</span>
-        <span>Disclaimer: Images used on this website are AI-generated for illustrative purposes.</span>
-        <span style={{ marginTop: '5px', display: 'block', fontSize: '0.85em', opacity: 0.7 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', flexWrap: 'wrap', gap: '8px' }}>
+          <span>&copy; {new Date().getFullYear()} Paripakv Foundation. All rights reserved.</span>
+          <span>Disclaimer: Images used on this website are AI-generated for illustrative purposes.</span>
+        </div>
+        <div style={{ marginTop: '10px', fontSize: '0.85em', opacity: 0.7, textAlign: 'center', width: '100%' }}>
           The content of this website has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States.
-        </span>
+        </div>
       </div>
     </footer>
   );
