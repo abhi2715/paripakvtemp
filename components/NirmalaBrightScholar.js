@@ -41,8 +41,24 @@ export default function NirmalaBrightScholar() {
 
   const scroll = (direction) => {
     if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       const scrollAmount = 350; // card width + gap
-      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+      
+      if (direction === 'right') {
+        // If at the end, loop back to the start
+        if (Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 10) {
+          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      } else {
+        // If at the start, loop back to the end
+        if (scrollLeft <= 10) {
+          scrollRef.current.scrollTo({ left: scrollWidth, behavior: 'smooth' });
+        } else {
+          scrollRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
+      }
     }
   };
 
