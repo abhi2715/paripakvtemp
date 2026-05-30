@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import ParallaxBackground from './ParallaxBackground';
+import SDGWheel from './SDGWheel';
 import styles from './VisionSection.module.css';
 
 export default function VisionSection() {
@@ -22,6 +23,12 @@ export default function VisionSection() {
           <p className={styles.text}>
             Paripakv Foundation is committed to making <strong>schools</strong> and <strong>communities future-ready</strong> where every <strong>child and youth</strong> has the <strong>education, tools and opportunities</strong> to thrive in an ever-changing world.
           </p>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '40px' }}>
+            <SDGWheel size={120} />
+            <p style={{ marginTop: '15px', fontSize: '0.95rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+              "Paripakv Foundation supports the Sustainable Development Goals"
+            </p>
+          </div>
         </motion.div>
 
         <motion.div 
