@@ -52,29 +52,31 @@ export default function FoundersSection() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: 0.2 + i * 0.2, duration: 0.9, type: 'spring', bounce: 0.4 }}
             >
-              {/* Avatar */}
-              <div className={styles.avatar}>
-                {f.image ? (
-                  <Image src={f.image} alt={f.name} fill sizes="80px" style={{ objectFit: 'cover', objectPosition: f.imagePosition || 'center' }} />
-                ) : (
-                  f.initials
-                )}
-              </div>
-              <h3 className={styles.name}>{f.name}</h3>
-              <span className={styles.role}>{f.role}</span>
-              <p className={styles.bio}>{f.bio}</p>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
+                {/* Avatar */}
+                <div className={styles.avatar}>
+                  {f.image ? (
+                    <Image src={f.image} alt={f.name} fill sizes="80px" style={{ objectFit: 'cover', objectPosition: f.imagePosition || 'center' }} />
+                  ) : (
+                    f.initials
+                  )}
+                </div>
+                <h3 className={styles.name}>{f.name}</h3>
+                <span className={styles.role}>{f.role}</span>
+                <p className={styles.bio}>{f.bio}</p>
 
-              {/* Email button */}
-              <a
-                href="mailto:paripakvfoundation@gmail.com"
-                className={styles.emailBtn}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <path d="m2 7 10 6 10-6"/>
-                </svg>
-                Connect via Email
-              </a>
+                {/* Email button */}
+                <a
+                  href="mailto:paripakvfoundation@gmail.com"
+                  className={styles.emailBtn}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="m2 7 10 6 10-6"/>
+                  </svg>
+                  Connect via Email
+                </a>
+              </div>
             </TiltCard>
           ))}
         </div>
