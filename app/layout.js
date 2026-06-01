@@ -1,5 +1,6 @@
 import { Inter, Noto_Serif_Devanagari, Outfit, Playfair_Display } from 'next/font/google';
 import './globals.css';
+import CookieBanner from '../components/CookieBanner';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const notoSerifDevanagari = Noto_Serif_Devanagari({ subsets: ['devanagari'], variable: '--font-noto-serif', display: 'swap' });
@@ -16,7 +17,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoSerifDevanagari.variable} ${outfit.variable} ${playfair.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieBanner />
+      </body>
     </html>
   );
 }
