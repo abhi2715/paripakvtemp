@@ -31,7 +31,7 @@ export default function FoundersSection() {
 
   return (
     <section className={`${styles.founders} section`} id="founders" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} image="/images/founders-bg.png" opacity={0.15} />
+      <ParallaxBackground targetRef={ref} image="/images/founders-bg.webp" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"

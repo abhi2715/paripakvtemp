@@ -25,7 +25,7 @@ export default function BlogsSection() {
         if (Array.isArray(data) && data.length > 0) {
           const mappedBlogs = data.map((b) => ({
             slug: b.slug || b._id,
-            image: b.coverImage || '/images/Hero section images/image 2.png',
+            image: b.coverImage || '/images/Hero section images/image 2.webp',
             date: b.publishedAt ? new Date(b.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown Date',
             title: b.title,
             excerpt: b.excerpt || (b.content
@@ -54,7 +54,7 @@ export default function BlogsSection() {
 
   return (
     <section className="section" id="blogs" ref={ref} style={{ background: 'var(--dark-mid)', position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 4.png" opacity={0.15} />
+      <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 4.webp" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"

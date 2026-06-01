@@ -50,7 +50,7 @@ export default function SamajhSection() {
 
   return (
     <section className={`${styles.section} section`} id="samajh" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} image="/images/samajh-bg.png" opacity={0.15} />
+      <ParallaxBackground targetRef={ref} image="/images/samajh-bg.webp" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
@@ -72,7 +72,7 @@ export default function SamajhSection() {
               transition={{ delay: 0.1, duration: 0.6, ease: 'easeOut' }}
             >
               <div className={styles.dummyImage} style={{ position: 'relative', width: '100%', height: '400px' }}>
-                <Image src="/images/Hero section images/image 5.png" alt="Samajh" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', borderRadius: '16px' }} />
+                <Image src="/images/Hero section images/image 5.webp" alt="Samajh" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', borderRadius: '16px' }} />
               </div>
             </motion.div>
             <motion.div

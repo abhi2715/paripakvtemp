@@ -11,7 +11,7 @@ export default function VisionSection() {
 
   return (
     <section className={`${styles.section} section`} id="vision" ref={ref}>
-      <ParallaxBackground targetRef={ref} image="/images/programmes-bg.jpeg" opacity={0.15} />
+      <ParallaxBackground targetRef={ref} image="/images/programmes-bg.webp" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className={styles.content}

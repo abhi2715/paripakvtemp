@@ -1,7 +1,7 @@
 'use client';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-export default function ParallaxBackground({ targetRef, opacity = 0.03, image = '/images/background.jpeg' }) {
+export default function ParallaxBackground({ targetRef, opacity = 0.03, image = '/images/background.webp' }) {
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start end", "end start"]

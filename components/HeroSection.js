@@ -20,14 +20,14 @@ export default function HeroSection() {
 
   // Using the user-provided images
   const localImages = [
-    '/images/Hero section images/image 2.png',
-    '/images/Hero section images/image 3.png',
-    '/images/Hero section images/image 4.png',
-    '/images/Hero section images/image 5.png',
-    '/images/Hero section images/image 6.png',
-    '/images/Hero section images/image 7.png',
-    '/images/Hero section images/image 8.png',
-    '/images/Hero section images/image 9.png',
+    '/images/Hero section images/image 2.webp',
+    '/images/Hero section images/image 3.webp',
+    '/images/Hero section images/image 4.webp',
+    '/images/Hero section images/image 5.webp',
+    '/images/Hero section images/image 6.webp',
+    '/images/Hero section images/image 7.webp',
+    '/images/Hero section images/image 8.webp',
+    '/images/Hero section images/image 9.webp',
   ];
   
   // Duplicate images to create a seamless infinite scrolling loop
@@ -36,7 +36,7 @@ export default function HeroSection() {
   return (
     <section className={styles.hero} id="home">
       {/* Background */}
-      <div className={styles.bg} style={{ backgroundImage: 'url(/images/background.jpeg)' }} />
+      <div className={styles.bg} style={{ backgroundImage: 'url(/images/background.webp)' }} />
       <div className={styles.overlay} />
 
       <AnimatePresence mode="wait">

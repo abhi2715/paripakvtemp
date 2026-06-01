@@ -33,7 +33,7 @@ export default async function BlogPostPage({ params }) {
       if (apiBlog && (apiBlog.slug === resolvedParams.slug || apiBlog._id === resolvedParams.slug)) {
         blog = {
           slug: apiBlog.slug || apiBlog._id,
-          image: apiBlog.coverImage || '/images/Hero section images/image 2.png',
+          image: apiBlog.coverImage || '/images/Hero section images/image 2.webp',
           date: apiBlog.createdAt ? new Date(apiBlog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown Date',
           title: apiBlog.title,
           excerpt: apiBlog.excerpt || (apiBlog.content

@@ -52,7 +52,7 @@ export default function GallerySection() {
       <motion.div 
         style={{ 
           position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, 
-          backgroundImage: 'url(/images/background.jpeg)', 
+          backgroundImage: 'url(/images/background.webp)', 
           backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.05,
           y 
         }} 

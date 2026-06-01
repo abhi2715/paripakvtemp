@@ -45,7 +45,7 @@ export default function ContactSection() {
 
   return (
     <section className={`${styles.section} section`} id="contact" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} image="/images/Extra-image for background.png" opacity={0.15} />
+      <ParallaxBackground targetRef={ref} image="/images/Extra-image for background.webp" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"

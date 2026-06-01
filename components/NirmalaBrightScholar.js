@@ -78,7 +78,7 @@ export default function NirmalaBrightScholar() {
   return (
     <>
       <section className={`${styles.section} section`} id="nirmala" ref={ref} style={{ position: 'relative', overflow: 'hidden', paddingBottom: '60px' }}>
-        <ParallaxBackground targetRef={ref} image="/images/nirmala-bg.png" opacity={0.15} />
+        <ParallaxBackground targetRef={ref} image="/images/nirmala-bg.webp" opacity={0.15} />
         <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
@@ -189,7 +189,7 @@ export default function NirmalaBrightScholar() {
 
       {/* ── Testimonials ── */}
       <section className={styles.testimonialsWrap} ref={trackRef} style={{ position: 'relative', overflow: 'hidden' }}>
-        <ParallaxBackground targetRef={trackRef} image="/images/testimonials-bg.png" opacity={0.15} />
+        <ParallaxBackground targetRef={trackRef} image="/images/testimonials-bg.webp" opacity={0.15} />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <motion.h3
             className={styles.testimonialsHeading}

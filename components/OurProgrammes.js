@@ -36,7 +36,7 @@ export default function OurProgrammes() {
 
   return (
     <section className="section" id="programmes" ref={ref} style={{ background: 'var(--dark-mid)', position: 'relative', overflow: 'hidden' }}>
-      <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 8.png" opacity={0.07} />
+      <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 8.webp" opacity={0.07} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="section-title-wrap"
