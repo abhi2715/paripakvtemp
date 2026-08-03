@@ -20,6 +20,7 @@ export default function Footer() {
             { label: 'Founders', href: '#founders' },
             { label: 'निर्मला Bright Scholars', href: '#nirmala' },
             { label: 'समझ', href: '#samajh' },
+            { label: 'Blogs', href: '#blogs' },
             { label: 'Get Involved', href: '#get-involved' },
             { label: 'Contact', href: '#contact' },
           ].map((l) => (
