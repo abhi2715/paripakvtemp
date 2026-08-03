@@ -269,6 +269,11 @@
   background: rgba(232, 168, 124, 0.15);
 }
 
+/* Close button — only visible on mobile where full-screen panel covers the FAB */
+.closeBtn {
+  display: none;
+}
+
 /* ─── Messages Area ────────────────────────────────────────────────────────── */
 
 .messagesArea {
@@ -732,6 +737,10 @@
   .inputArea {
     padding: 10px 12px;
     padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .closeBtn {
+    display: flex;
   }
 }
 
