@@ -120,6 +120,7 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    padding-bottom: 20px;
   }
 
   /* Hide scrollbar for a cleaner swipe carousel look */
@@ -127,30 +128,45 @@
     display: none;
   }
   .trackContainer {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .staticInner {
     justify-content: flex-start;
     width: max-content;
-    padding: 0 20px;
   }
 
   .marqueeInner {
-    /* If we have more than 3, we can still animate or let them swipe. 
-       Let's keep the animation but allow swiping. Actually, if it's animating, swiping might conflict.
-       Disabling marquee on mobile for a standard swipe carousel is usually better UX. */
     animation: none;
     width: max-content;
+  }
+
+  .track {
+    gap: 16px;
     padding: 0 20px;
+    padding-right: 20px;
   }
 
   .blogCard {
-    width: 280px;
+    width: 72vw;
+    max-width: 300px;
     scroll-snap-align: center;
+    flex-shrink: 0;
   }
   .imageWrap {
     height: 180px;
   }
+  .contentWrap {
+    padding: 16px;
+  }
+  .title {
+    font-size: 1.1rem;
+  }
+  .excerpt {
+    font-size: 0.85rem;
+    -webkit-line-clamp: 3;
+    margin-bottom: 16px;
+  }
 }
+

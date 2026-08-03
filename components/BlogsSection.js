@@ -8,9 +8,22 @@ import styles from './BlogsSection.module.css';
 
 import { blogsData } from '../lib/blogsData';
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    setIsMobile(mql.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 export default function BlogsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isMobile = useIsMobile();
 
   // Use the static blogs imported from blogsData as initial state
   const [blogsToDisplay, setBlogsToDisplay] = useState(blogsData);
@@ -53,7 +66,7 @@ export default function BlogsSection() {
   }, []);
 
   return (
-    <section className="section" id="blogs" ref={ref} style={{ background: 'var(--dark-mid)', position: 'relative', overflow: 'hidden' }}>
+    <section className="section" id="blogs" ref={ref} style={{ background: 'var(--dark-mid)', position: 'relative', overflowX: 'clip', overflowY: 'hidden' }}>
       <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 4.webp" opacity={0.15} />
       <div className="max-width" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
@@ -73,25 +86,28 @@ export default function BlogsSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          <div className={blogsToDisplay.length > 3 ? styles.marqueeInner : styles.staticInner}>
+          <div className={!isMobile && blogsToDisplay.length > 3 ? styles.marqueeInner : styles.staticInner}>
             {/* First Set (Always Rendered) */}
             <div className={styles.track}>
-              {blogsToDisplay.map((blog, i) => (
-                <TiltCard key={i} className={styles.blogCard}>
-                  <div className={styles.imageWrap}>
-                    <Image src={blog.image} alt={blog.title} fill sizes="350px" style={{ objectFit: 'cover' }} />
-                  </div>
-                  <div className={styles.contentWrap}>
-                    <div className={styles.date}>{blog.date}</div>
-                    <h3 className={styles.title}>{blog.title}</h3>
-                    <p className={styles.excerpt}>{blog.excerpt}</p>
-                    <a href={blog.slug ? `/blog/${blog.slug}` : "#blogs"} className={styles.readMore}>Read More →</a>
-                  </div>
-                </TiltCard>
-              ))}
+              {blogsToDisplay.map((blog, i) => {
+                const CardWrapper = isMobile ? 'div' : TiltCard;
+                return (
+                  <CardWrapper key={i} className={styles.blogCard}>
+                    <div className={styles.imageWrap}>
+                      <Image src={blog.image} alt={blog.title} fill sizes="(max-width: 768px) 75vw, 350px" style={{ objectFit: 'cover' }} />
+                    </div>
+                    <div className={styles.contentWrap}>
+                      <div className={styles.date}>{blog.date}</div>
+                      <h3 className={styles.title}>{blog.title}</h3>
+                      <p className={styles.excerpt}>{blog.excerpt}</p>
+                      <a href={blog.slug ? `/blog/${blog.slug}` : "#blogs"} className={styles.readMore}>Read More →</a>
+                    </div>
+                  </CardWrapper>
+                );
+              })}
             </div>
-            {/* Duplicate Set for Seamless Loop (Only when animating) */}
-            {blogsToDisplay.length > 3 && (
+            {/* Duplicate Set for Seamless Loop (Only on desktop with many blogs) */}
+            {!isMobile && blogsToDisplay.length > 3 && (
               <div className={styles.track} aria-hidden="true">
                 {blogsToDisplay.map((blog, i) => (
                   <TiltCard key={`dup-${i}`} className={styles.blogCard}>
