@@ -101,6 +101,15 @@ export default function Navbar() {
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.35 }}
           >
+            <button 
+              className={styles.closeMenuBtn} 
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
             <ul>
               {navLinks.map((link, i) => (
                 <motion.li

@@ -163,7 +163,28 @@
   background: #1d1d1d;
   border-left: 1px solid rgba(232, 168, 124, 0.2);
   padding: 100px 30px 40px;
-  z-index: 999;
+  z-index: 1001;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.closeMenuBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: #E8A87C;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.closeMenuBtn:hover {
+  transform: rotate(90deg);
+  color: var(--white);
 }
 
 .mobileMenu ul {
