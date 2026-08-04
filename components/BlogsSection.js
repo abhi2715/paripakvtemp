@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useInView } from 'framer-motion';
 import TiltCard from './TiltCard';
 import ParallaxBackground from './ParallaxBackground';
@@ -22,8 +22,12 @@ function useIsMobile(breakpoint = 768) {
 
 export default function BlogsSection() {
   const ref = useRef(null);
+  const scrollRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const isMobile = useIsMobile();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const autoScrollPaused = useRef(false);
+  const pauseTimeout = useRef(null);
 
   // Use the static blogs imported from blogsData as initial state
   const [blogsToDisplay, setBlogsToDisplay] = useState(blogsData);
@@ -65,6 +69,66 @@ export default function BlogsSection() {
       });
   }, []);
 
+  // ── Auto-scroll on mobile ──
+  const scrollToIndex = useCallback((index) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll('[data-blog-card]');
+    if (!cards[index]) return;
+    const card = cards[index];
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const scrollLeft = card.offsetLeft - (containerRect.width / 2) + (cardRect.width / 2);
+    container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile || blogsToDisplay.length <= 1) return;
+
+    const interval = setInterval(() => {
+      if (autoScrollPaused.current) return;
+      setActiveIndex(prev => {
+        const next = (prev + 1) % blogsToDisplay.length;
+        scrollToIndex(next);
+        return next;
+      });
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isMobile, blogsToDisplay.length, scrollToIndex]);
+
+  // Pause auto-scroll on user touch, resume 5s after release
+  const handleTouchStart = useCallback(() => {
+    autoScrollPaused.current = true;
+    if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+    pauseTimeout.current = setTimeout(() => {
+      autoScrollPaused.current = false;
+    }, 5000);
+  }, []);
+
+  // Update activeIndex from manual scroll position
+  const handleScroll = useCallback(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const cards = container.querySelectorAll('[data-blog-card]');
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+    let closestIdx = 0;
+    let closestDist = Infinity;
+    cards.forEach((card, i) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const dist = Math.abs(containerCenter - cardCenter);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIdx = i;
+      }
+    });
+    setActiveIndex(closestIdx);
+  }, []);
+
   return (
     <section className="section" id="blogs" ref={ref} style={{ background: 'var(--dark-mid)', position: 'relative', overflowX: 'clip', overflowY: 'hidden' }}>
       <ParallaxBackground targetRef={ref} image="/images/Hero section images/image 4.webp" opacity={0.15} />
@@ -81,10 +145,14 @@ export default function BlogsSection() {
 
         <motion.div
           className={styles.trackContainer}
+          ref={scrollRef}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.8 }}
+          onTouchStart={isMobile ? handleTouchStart : undefined}
+          onTouchEnd={isMobile ? handleTouchEnd : undefined}
+          onScroll={isMobile ? handleScroll : undefined}
         >
           <div className={!isMobile && blogsToDisplay.length > 3 ? styles.marqueeInner : styles.staticInner}>
             {/* First Set (Always Rendered) */}
@@ -92,7 +160,7 @@ export default function BlogsSection() {
               {blogsToDisplay.map((blog, i) => {
                 const CardWrapper = isMobile ? 'div' : TiltCard;
                 return (
-                  <CardWrapper key={i} className={styles.blogCard}>
+                  <CardWrapper key={i} className={styles.blogCard} data-blog-card>
                     <div className={styles.imageWrap}>
                       <Image src={blog.image} alt={blog.title} fill sizes="(max-width: 768px) 75vw, 350px" style={{ objectFit: 'cover' }} />
                     </div>
@@ -126,6 +194,20 @@ export default function BlogsSection() {
             )}
           </div>
         </motion.div>
+
+        {/* Dot indicators (mobile only) */}
+        {isMobile && blogsToDisplay.length > 1 && (
+          <div className={styles.dots}>
+            {blogsToDisplay.map((_, i) => (
+              <button
+                key={i}
+                className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
+                onClick={() => { scrollToIndex(i); setActiveIndex(i); }}
+                aria-label={`Go to blog ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

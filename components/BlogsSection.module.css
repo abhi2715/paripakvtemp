@@ -170,3 +170,31 @@
   }
 }
 
+/* ─── Dot Indicators (Mobile Carousel) ─────────────────────────────────── */
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(232, 168, 124, 0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.dot:hover {
+  background: rgba(232, 168, 124, 0.5);
+}
+
+.dotActive {
+  background: #E8A87C;
+  transform: scale(1.3);
+}
