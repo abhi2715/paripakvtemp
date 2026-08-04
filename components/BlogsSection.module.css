@@ -115,30 +115,12 @@
 
 @media (max-width: 768px) {
   .trackContainer {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+    overflow: hidden;
     padding-bottom: 20px;
-  }
-
-  /* Hide scrollbar for a cleaner swipe carousel look */
-  .trackContainer::-webkit-scrollbar {
-    display: none;
-  }
-  .trackContainer {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
   }
 
   .staticInner {
     justify-content: flex-start;
-    width: max-content;
-  }
-
-  .marqueeInner {
-    animation: none;
     width: max-content;
   }
 
@@ -151,7 +133,6 @@
   .blogCard {
     width: 72vw;
     max-width: 300px;
-    scroll-snap-align: center;
     flex-shrink: 0;
   }
   .imageWrap {
@@ -170,31 +151,4 @@
   }
 }
 
-/* ─── Dot Indicators (Mobile Carousel) ─────────────────────────────────── */
 
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 0 0;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(232, 168, 124, 0.25);
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.dot:hover {
-  background: rgba(232, 168, 124, 0.5);
-}
-
-.dotActive {
-  background: #E8A87C;
-  transform: scale(1.3);
-}
