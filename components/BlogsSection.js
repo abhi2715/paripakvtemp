@@ -86,7 +86,7 @@ export default function BlogsSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          <div className={blogsToDisplay.length > 2 ? styles.marqueeInner : styles.staticInner}>
+          <div className={(isMobile ? blogsToDisplay.length > 1 : blogsToDisplay.length > 3) ? styles.marqueeInner : styles.staticInner}>
             {/* First Set (Always Rendered) */}
             <div className={styles.track}>
               {blogsToDisplay.map((blog, i) => {
@@ -107,7 +107,7 @@ export default function BlogsSection() {
               })}
             </div>
             {/* Duplicate Set for Seamless Loop */}
-            {blogsToDisplay.length > 2 && (
+            {(isMobile ? blogsToDisplay.length > 1 : blogsToDisplay.length > 3) && (
               <div className={styles.track} aria-hidden="true">
                 {blogsToDisplay.map((blog, i) => {
                   const CardWrapper = isMobile ? 'div' : TiltCard;
